@@ -1,48 +1,12 @@
 # -*- coding: utf-8 -*-
-"""記事に埋め込む図解(インラインSVG)。すべて viewBox + width:100% で可変幅。"""
+"""「高浜市で失敗しない工務店の選び方」の図解。
 
-FONT = '"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif'
-
-# パレット(dataviz reference palette より)
-NAVY   = '#0d366b'   # blue 700  見出し・強調
-BLUE   = '#2a78d6'   # blue 450  中立情報
-BLUE_L = '#86b6ef'   # blue 250  ordinal 最淡ステップ
-BLUE_M = '#184f95'   # blue 600
-GOOD   = '#0ca30c'   # status good
-CRIT   = '#d03b3b'   # status critical
-WARN   = '#fab219'   # status warning
-INK    = '#1a1a19'
-INK2   = '#52514e'
-LINE   = '#d8d8d4'
-SURF   = '#ffffff'
-TINT   = '#f4f7fb'
-
-def wrap(inner, vb_w, vb_h, title, desc):
-    return (
-        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {vb_w} {vb_h}" '
-        f'role="img" aria-labelledby="t{abs(hash(title))%99999} d{abs(hash(desc))%99999}" '
-        f'style="width:100%;min-width:660px;height:auto;display:block;font-family:{FONT}">'
-        f'<title id="t{abs(hash(title))%99999}">{title}</title>'
-        f'<desc id="d{abs(hash(desc))%99999}">{desc}</desc>'
-        f'<rect width="{vb_w}" height="{vb_h}" fill="{SURF}"/>'
-        f'{inner}</svg>'
-    )
-
-def txt(x, y, s, size=16, fill=INK, weight='400', anchor='start'):
-    return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" '
-            f'font-weight="{weight}" text-anchor="{anchor}">{s}</text>')
-
-def box(x, y, w, h, fill=SURF, stroke=LINE, sw=1.5, r=8):
-    return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}" stroke="{stroke}" stroke-width="{sw}"/>'
-
-def check(x, y, color=GOOD):
-    return (f'<path d="M{x} {y} l4 4 l7-9" fill="none" stroke="{color}" '
-            f'stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>')
-
-def cross(x, y, color=CRIT):
-    return (f'<path d="M{x-4} {y-4} l9 9 M{x+5} {y-4} l-9 9" fill="none" stroke="{color}" '
-            f'stroke-width="2.6" stroke-linecap="round"/>')
-
+共通部品は .claude/skills/homepage-article/scripts/svg_kit.py にある。
+新しい記事の図解も、必ずこの形（FIGURES辞書）で書くこと。
+"""
+from svg_kit import (FONT, NAVY, BLUE, BLUE_L, BLUE_M, GOOD, GOOD_D, CRIT, CRIT_D,
+                     WARN, WARN_D, INK, INK2, MUTE, LINE, SURF, TINT,
+                     wrap, txt, box, check, cross, dash, arrow, pill, chip)
 
 # ── 図1: 壁量計算 vs 許容応力度計算 ──────────────────────
 def fig_kouzou():
@@ -57,7 +21,7 @@ def fig_kouzou():
     # 右カード
     s.append(box(460, 56, 420, 340, '#eef7f0', LINE))
     s.append(box(460, 56, 420, 46, '#dff0e3', LINE))
-    s.append(txt(480, 86, '許容応力度計算', 20, '#0a5c2e', '700'))
+    s.append(txt(480, 86, '許容応力度計算', 20, GOOD_D, '700'))
     s.append(txt(680, 86, '緻密な構造計算', 14, INK2))
 
     s.append(txt(0, 32, '同じ「耐震等級3」でも、どこまで計算しているかが違います', 17, INK, '700'))
@@ -69,13 +33,13 @@ def fig_kouzou():
             s.append(check(22, y - 5)); s.append(txt(48, y, name, 15, INK, '600'))
         else:
             s.append(f'<line x1="20" y1="{y-5}" x2="34" y2="{y-5}" stroke="#a8a8a3" stroke-width="2.6" stroke-linecap="round"/>')
-            s.append(txt(48, y, name, 15, '#8a8a86'))
-            s.append(txt(400, y, '仕様の基準で判断', 13, '#8a8a86', '400', 'end'))
+            s.append(txt(48, y, name, 15, MUTE))
+            s.append(txt(400, y, '仕様の基準で判断', 13, MUTE, '400', 'end'))
         # 右: 全部1棟ごとに計算
         s.append(check(482, y - 5)); s.append(txt(508, y, name, 15, INK, '600'))
 
     s.append(txt(20, 376, '→ 1棟ごとに計算するのは壁の量だけ', 14, '#8a6100', '700'))
-    s.append(txt(480, 376, '→ 5項目すべてを1棟ごとに計算する', 14, '#0a5c2e', '700'))
+    s.append(txt(480, 376, '→ 5項目すべてを1棟ごとに計算する', 14, GOOD_D, '700'))
     s.append(txt(0, 420, '※ 壁量計算でも金物や基礎には仕様の基準がありますが、その建物に合わせた個別の計算はしません', 13, INK2))
     s.append(txt(0, 440, '※「耐震等級3“相当”」は第三者機関の評価を受けていないという意味です', 13, INK2))
     return wrap(''.join(s), W, H,
@@ -129,10 +93,10 @@ def fig_mitsumori():
     s.append(txt(20, 250, 'この工事はどこまで含む？', 15, CRIT))
     s.append(box(20, 280, 380, 76, '#fbe3e3', CRIT, 1.5))
     s.append(txt(38, 308, '誰にも分からない', 16, CRIT, '700'))
-    s.append(txt(38, 334, '着工後、1か所追加するたびに費用が増える', 14, '#8f2b2b'))
+    s.append(txt(38, 334, '着工後、1か所追加するたびに費用が増える', 14, CRIT_D))
     # 右: 内訳明細
     s.append(box(460, 50, 420, 330, '#f1faf3', GOOD, 1.5))
-    s.append(txt(480, 82, '◯　数量と単価が入った内訳明細', 17, '#0a5c2e', '700'))
+    s.append(txt(480, 82, '◯　数量と単価が入った内訳明細', 17, GOOD_D, '700'))
     s.append(f'<line x1="480" y1="96" x2="860" y2="96" stroke="{LINE}"/>')
     rows = [('コンセント', '24 か所', '96,000'), ('スイッチ', '18 か所', '72,000'),
             ('照明器具取付', '16 台', '80,000'), ('分電盤', '1 面', '85,000'),
@@ -143,7 +107,7 @@ def fig_mitsumori():
         s.append(txt(690, y, b, 14, INK2, '400', 'end'))
         s.append(txt(860, y, c, 14, INK, '600', 'end'))
     s.append(box(480, 290, 380, 66, '#dff0e3', GOOD, 1.5))
-    s.append(txt(498, 316, '他社と1行ずつ比べられる', 16, '#0a5c2e', '700'))
+    s.append(txt(498, 316, '他社と1行ずつ比べられる', 16, GOOD_D, '700'))
     s.append(txt(498, 340, '要らない設備を削って減額の相談もできる', 14, '#14683a'))
     s.append(txt(0, 410, '※ 出してもらう費用は0円。頼むだけです。数量・単価は記載例です', 13, INK2))
     return wrap(''.join(s), W, H,
@@ -169,13 +133,13 @@ def fig_hosho():
 
     s.append(box(460, 50, 420, 250, '#f1faf3', GOOD, 2))
     s.append(box(460, 50, 420, 44, '#dff0e3', GOOD, 2))
-    s.append(txt(480, 78, '住宅完成保証', 17, '#0a5c2e', '700'))
+    s.append(txt(480, 78, '住宅完成保証', 17, GOOD_D, '700'))
     s.append(box(480, 108, 60, 26, '#c9e7d1', GOOD, 1.2, 13))
-    s.append(txt(510, 126, '任意', 13, '#0a5c2e', '700', 'middle'))
+    s.append(txt(510, 126, '任意', 13, GOOD_D, '700', 'middle'))
     s.append(txt(480, 166, '完成前に倒産したときに備える保証', 15, INK))
     s.append(txt(480, 194, '前払金と、引き継ぐ会社への追加費用', 15, INK))
     s.append(box(480, 220, 380, 60, '#dff0e3', GOOD, 1.5))
-    s.append(txt(498, 248, '入っていない会社のほうが多い', 15, '#0a5c2e', '700'))
+    s.append(txt(498, 248, '入っていない会社のほうが多い', 15, GOOD_D, '700'))
     s.append(txt(498, 270, '＝ 入っていれば強い判断材料になる', 14, '#14683a'))
     return wrap(''.join(s), W, H,
                 '住宅瑕疵担保責任保険と住宅完成保証の違い',
@@ -208,19 +172,19 @@ def fig_taisei():
         if x != xs[-1]:
             s.append(arrow(x + 158, 128, bad=True))
     s.append(arrow(578, 128, bad=True))
-    s.append(person(608, 100, '家', '#8a8a86', SURF, 110))
+    s.append(person(608, 100, '家', MUTE, SURF, 110))
     s.append(txt(742, 122, '要望が3回', 14, CRIT, '700'))
     s.append(txt(742, 142, '伝言される', 14, CRIT, '700'))
-    s.append(txt(20, 186, '設計者の意図が現場に届かず、現場が納まりやすいやり方で処理されてしまう', 14, '#8f2b2b'))
+    s.append(txt(20, 186, '設計者の意図が現場に届かず、現場が納まりやすいやり方で処理されてしまう', 14, CRIT_D))
 
     # 下段: 一貫
     s.append(box(0, 222, 880, 150, '#f1faf3', GOOD, 2))
-    s.append(txt(20, 252, '◯　設計した建築士が、そのまま現場も管理する', 16, '#0a5c2e', '700'))
+    s.append(txt(20, 252, '◯　設計した建築士が、そのまま現場も管理する', 16, GOOD_D, '700'))
     s.append(person(20, 272, '建築士', GOOD, SURF, 346))
     s.append(arrow(384, 300))
     s.append(person(414, 272, '家', '#14683a', SURF, 110))
-    s.append(txt(548, 294, '伝言ゲームが', 14, '#0a5c2e', '700'))
-    s.append(txt(548, 314, 'そもそも起きない', 14, '#0a5c2e', '700'))
+    s.append(txt(548, 294, '伝言ゲームが', 14, GOOD_D, '700'))
+    s.append(txt(548, 314, 'そもそも起きない', 14, GOOD_D, '700'))
     s.append(txt(20, 358, '「設計した人と、現場を管理する人は同じですか？」— 聞けば分かります', 14, '#14683a'))
     return wrap(''.join(s), W, H,
                 '分業体制と設計施工一貫体制の違い',

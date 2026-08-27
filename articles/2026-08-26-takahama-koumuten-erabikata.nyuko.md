@@ -141,11 +141,11 @@ SVGが削除されることがあります。**
 
 | 図 | PNGファイル | 差し替える位置 |
 |---|---|---|
-| 図1 | `fig-kouzou.png` | 質問2の直前 |
-| 図2 | `fig-dannetsu.png` | 質問5の直前 |
-| 図3 | `fig-mitsumori.png` | 質問7の直前 |
-| 図4 | `fig-hosho.png` | 【人と体制】の直前 |
-| 図5 | `fig-taisei.png` | 「逆に、そこまで〜」の直前 |
+| 図1 | `figures/fig-kouzou.png` | 質問2の直前 |
+| 図2 | `figures/fig-dannetsu.png` | 質問5の直前 |
+| 図3 | `figures/fig-mitsumori.png` | 質問7の直前 |
+| 図4 | `figures/fig-hosho.png` | 【人と体制】の直前 |
+| 図5 | `figures/fig-taisei.png` | 「逆に、そこまで〜」の直前 |
 
 PNGは横1760px（Retina対応の2倍解像度）です。altは各図のキャプションをそのまま使ってください。
 
