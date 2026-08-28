@@ -1,2 +1,6 @@
 # skill-creator が生成するパッケージ(.claude/skills/ から再生成できるビルド成果物)
 *.skill
+
+# Pythonのビルドキャッシュ(homepage-articleスキルのスクリプト用)
+__pycache__/
+*.pyc
