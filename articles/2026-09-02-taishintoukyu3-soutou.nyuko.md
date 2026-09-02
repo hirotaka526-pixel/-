@@ -21,26 +21,17 @@ WordPress管理画面 → **投稿 → 新規投稿を追加**（既存の「コ
 耐震等級3「相当」は本物か｜地震保険で分かる違いと、契約前に確認すべきこと
 ```
 
-## 手順4｜スラッグ（URL）を決める・設定する
+## 手順4｜スラッグ（URL）を設定する
 
-**複数案を作りました。推奨はAです。**
-
-| # | 案 | 語数 | ねらい |
-|---|---|---|---|
-| **A（推奨）** | `taishin3-soutou-chigai` | 3語(21字) | 「耐震等級3」を短縮しつつ「相当」「違い」という核心語を残す。長さと情報量のバランスが良い |
-| B | `taishintoukyu3-soutou-chigai` | 3語(29字) | 「耐震等級」を省略しない情報量重視の案。Aより8文字長い |
-| C | `taishin-jishinhoken` | 2語(19字) | 地震保険という記事の核心に寄せた行動語重視の案。ただし「等級」「相当」が消えるため、この記事だと分かりにくい |
-| D | `taishintoukyu-soutou` | 2語(21字) | 最短。ハブ記事`takahama-koumuten-erabikata`と同じ「テーマ+行動」2語構成に揃う |
-
-**推奨理由（A）**：「耐震等級3」「相当」「違い」という記事の核心3語を落とさずに、Bより8文字短くできる。Dは短いが「3」が消えて他の耐震等級記事（等級1・2相当など）と将来区別しにくくなる懸念がある。
+複数案の中から **B（`taishintoukyu3-soutou-chigai`）で確定**しました。
+「耐震等級」を省略せず情報量を優先した案です。ファイル名・本文中の内部リンクは
+すべてこの値で統一済みです。
 
 ```
-taishin3-soutou-chigai
+taishintoukyu3-soutou-chigai
 ```
 
-公開URL: `https://inthehome.jp/column/taishin3-soutou-chigai/`
-
-※ Aで進める前提で以降を書いています。他の案にする場合は本文中の内部リンク表記も合わせて調整してください。
+公開URL: `https://inthehome.jp/column/taishintoukyu3-soutou-chigai/`
 
 ## 手順5｜SEOプラグインにtitleとmeta descriptionを入れる
 
