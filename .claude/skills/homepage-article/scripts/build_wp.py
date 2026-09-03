@@ -206,6 +206,8 @@ def sns_end():
               'https://www.youtube.com/@inthehome', '#c4302b')
         + btn('@in.the.home', 'Instagram',
               'https://www.instagram.com/in.the.home/', '#b4318f')
+        + btn('まえちゃん｜家づくりを丸ごとサポートする建築士', 'Instagram',
+              'https://www.instagram.com/maechan.no.iezukuri/', '#b4318f')
         + '</div></div>')
 
 
