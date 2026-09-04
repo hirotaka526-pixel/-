@@ -1,2 +1,4 @@
 # skill-creator が生成するパッケージ(.claude/skills/ から再生成できるビルド成果物)
 *.skill
+lp/*/canvas-src/*.html
+!lp/*/canvas-src/*.dc.html
