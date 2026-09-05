@@ -1,6 +1,6 @@
 {
   "artboards": [
-    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 430, "h": 8800, "title": "家づくりサポート 無料相談LP" }
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 430, "h": 9600, "title": "家づくりサポート 無料相談LP" }
   ],
   "launch": { "view": "focused", "file": "Main.dc.html" }
 }

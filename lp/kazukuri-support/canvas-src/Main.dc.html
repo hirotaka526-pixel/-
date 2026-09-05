@@ -12,77 +12,153 @@
     :root {
       --bg: oklch(98% 0.012 80);
       --bg-alt: oklch(95.5% 0.014 75);
-      --ink: oklch(23% 0.02 60);
+      --ink: oklch(21% 0.022 60);
       --ink-soft: oklch(42% 0.02 60);
       --line: oklch(88% 0.012 75);
       --blue: oklch(42% 0.075 235);
       --blue-soft: oklch(93% 0.02 235);
-      --wood: oklch(52% 0.085 55);
+      --blue-light: oklch(80% 0.06 235);
+      --wood: oklch(52% 0.09 50);
       --wood-soft: oklch(93% 0.03 55);
+      --wood-light: oklch(80% 0.075 55);
       --white: oklch(100% 0 0);
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3 { font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif; margin: 0; line-height: 1.5; }
-    p { margin: 0; line-height: 1.9; color: var(--ink-soft); }
+    body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif; font-size: 15px; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif; margin: 0; line-height: 1.5; letter-spacing: 0.01em; }
+    p { margin: 0; line-height: 1.95; color: var(--ink-soft); }
+    strong { color: var(--ink); font-weight: 700; }
     a { color: var(--blue); }
     a:hover { color: oklch(32% 0.075 235); }
-    .wrap { max-width: 430px; margin: 0 auto; background: var(--bg); }
-    .pad { padding: 40px 24px; }
+    .wrap { max-width: 430px; margin: 0 auto; background: var(--bg); overflow: hidden; }
+    .pad { position: relative; padding: 48px 24px; overflow: hidden; }
     .rule { height: 1px; background: var(--line); }
-    .eyebrow { font-size: 12px; letter-spacing: 0.14em; color: var(--wood); font-weight: 700; }
+
+    .num-mark {
+      position: absolute; top: 8px; right: 18px; font-family: "Shippori Mincho", serif;
+      font-size: 68px; font-weight: 800; color: var(--ink); opacity: 0.05; line-height: 1;
+      pointer-events: none; z-index: 0;
+    }
+    .pad > * { position: relative; z-index: 1; }
+
+    .eyebrow {
+      display: inline-block; font-size: 11px; letter-spacing: 0.16em; font-weight: 700;
+      padding: 5px 12px; border-radius: 999px; background: var(--wood-soft); color: var(--wood);
+    }
+    .eyebrow.blue { background: var(--blue-soft); color: var(--blue); }
+    .eyebrow.on-dark { background: rgba(255,255,255,0.12); color: var(--wood-light); }
+    .eyebrow.on-dark.blue { color: var(--blue-light); }
+    h2.section-title { font-size: 23px; margin-top: 10px; color: var(--ink); }
+
     .cta-btn {
       display: flex; align-items: center; justify-content: center; gap: 10px;
-      width: 100%; padding: 18px 20px; border-radius: 4px;
+      width: 100%; padding: 19px 20px; border-radius: 8px;
       background: var(--blue); color: var(--white); font-weight: 700; font-size: 16px;
-      letter-spacing: 0.02em; border: none; text-decoration: none; font-family: inherit;
+      letter-spacing: 0.03em; border: none; text-decoration: none; font-family: inherit;
+      box-shadow: 0 10px 24px oklch(42% 0.075 235 / 32%);
     }
+    .cta-btn.on-dark { background: var(--white); color: var(--ink); box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
     .cta-note {
       margin-top: 10px; font-size: 12px; color: var(--ink-soft); text-align: center;
       border: 1px dashed var(--line); border-radius: 4px; padding: 8px 10px; background: var(--bg-alt);
     }
-    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .cta-note.on-dark { color: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); }
+
+    /* Hero: photo + overlapping card */
+    .hero-photo {
+      position: relative; width: 100%; aspect-ratio: 4 / 5;
+      background: linear-gradient(160deg, oklch(30% 0.03 60), oklch(20% 0.02 60));
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
+      color: rgba(255,255,255,0.55);
+    }
+    .hero-photo .cap { font-size: 12px; text-align: center; color: rgba(255,255,255,0.55); }
+    .hero-badges {
+      position: absolute; top: 20px; left: 20px; right: 20px; z-index: 2;
+      display: flex; flex-wrap: wrap; gap: 8px;
+    }
     .badge {
-      display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px;
-      border: 1px solid var(--line); border-radius: 999px; font-size: 12px; color: var(--ink);
-      background: var(--white);
+      display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px;
+      border-radius: 999px; font-size: 12px; font-weight: 600;
+      color: var(--ink); background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
     }
-    .check-item { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; }
+    .hero-card {
+      position: relative; margin-top: -32px; background: var(--bg);
+      border-radius: 26px 26px 0 0; padding: 38px 24px 42px; z-index: 3;
+      box-shadow: 0 -16px 32px rgba(0,0,0,0.10);
+    }
+
+    .badge.strong { background: var(--blue); color: var(--white); border-color: var(--blue); font-weight: 700; }
+    .check-item { display: flex; gap: 14px; align-items: flex-start; padding: 15px 0; }
     .check-item + .check-item { border-top: 1px solid var(--line); }
-    .check-icon { flex: 0 0 auto; margin-top: 3px; }
-    .quote {
-      border-left: 3px solid var(--wood); padding: 4px 0 4px 18px; font-family: "Shippori Mincho", serif;
-      font-size: 18px; line-height: 1.8; color: var(--ink);
+    .check-badge {
+      flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
     }
+    .check-badge.wood { background: var(--wood-soft); color: var(--wood); }
+    .check-badge.blue { background: var(--blue-soft); color: var(--blue); }
+
+    .quote {
+      position: relative; padding: 6px 4px 4px 22px; font-family: "Shippori Mincho", serif;
+      font-size: 19px; font-weight: 600; line-height: 1.75; color: var(--white);
+    }
+    .quote::before {
+      content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 4px;
+      border-radius: 2px; background: var(--wood-light);
+    }
+    .band-dark {
+      background: var(--ink); color: rgba(255,255,255,0.78);
+    }
+    .band-dark p { color: rgba(255,255,255,0.78); }
+    .band-dark .num-mark { color: var(--white); }
+
     .promise-box {
-      background: var(--blue-soft); border-radius: 4px; padding: 20px 22px; margin-top: 20px;
+      background: var(--blue-soft); border-radius: 10px; padding: 22px; margin-top: 20px;
+      border: 1px solid oklch(85% 0.03 235);
     }
     .stat-row { display: flex; gap: 14px; }
     .stat-card {
-      flex: 1; background: var(--white); border: 1px solid var(--line); border-radius: 4px;
-      padding: 16px 14px;
+      flex: 1; background: var(--white); border-top: 3px solid var(--blue); border-radius: 8px;
+      padding: 18px 14px; box-shadow: 0 4px 14px oklch(23% 0.02 60 / 7%);
     }
-    .stat-num { font-family: "Shippori Mincho", serif; font-size: 26px; color: var(--blue); }
+    .stat-num { font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; color: var(--blue); }
     .stat-label { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
-    .point-row { display: flex; gap: 12px; padding: 12px 0; }
+
+    .point-row { display: flex; gap: 14px; padding: 13px 0; align-items: flex-start; }
     .point-row + .point-row { border-top: 1px solid var(--line); }
-    .point-num { flex: 0 0 auto; font-family: "Shippori Mincho", serif; font-size: 14px; color: var(--wood); width: 22px; }
-    .faq-item { padding: 18px 0; }
-    .faq-item + .faq-item { border-top: 1px solid var(--line); }
-    .faq-q { display: flex; gap: 10px; font-weight: 700; font-size: 15px; color: var(--ink); }
-    .faq-q-mark { color: var(--blue); font-family: "Shippori Mincho", serif; flex: 0 0 auto; }
-    .faq-a { display: flex; gap: 10px; margin-top: 8px; font-size: 14px; }
-    .faq-a-mark { color: var(--wood); font-family: "Shippori Mincho", serif; flex: 0 0 auto; }
+    .point-badge {
+      flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--blue-soft);
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Shippori Mincho", serif; font-size: 13px; font-weight: 700; color: var(--blue);
+    }
+
+    .faq-item {
+      padding: 18px 18px; background: var(--white); border-radius: 10px;
+      box-shadow: 0 2px 10px oklch(23% 0.02 60 / 6%);
+    }
+    .faq-item + .faq-item { margin-top: 12px; }
+    .faq-q { display: flex; gap: 12px; font-weight: 700; font-size: 15px; color: var(--ink); }
+    .faq-a { display: flex; gap: 12px; margin-top: 10px; font-size: 14px; }
+    .qa-mark {
+      flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: "Shippori Mincho", serif; font-size: 13px; font-weight: 700;
+    }
+    .qa-mark.q { background: var(--blue); color: var(--white); }
+    .qa-mark.a { background: var(--wood-soft); color: var(--wood); }
+
     .section-bg-alt { background: var(--bg-alt); }
-    .footer { background: var(--ink); color: oklch(85% 0.01 75); }
-    .footer p, .footer .fine { color: oklch(70% 0.012 75); }
+
+    .footer { background: oklch(14% 0.018 60); color: oklch(85% 0.01 75); }
+    .footer p, .footer .fine { color: oklch(66% 0.012 75); }
     .footer .fine { font-size: 11px; line-height: 1.8; }
     .pending {
       display: inline-block; margin-top: 6px; font-size: 11px; padding: 3px 8px;
-      border: 1px dashed oklch(55% 0.01 75); border-radius: 999px; color: oklch(80% 0.01 75);
+      border: 1px dashed oklch(45% 0.01 75); border-radius: 999px; color: oklch(70% 0.01 75);
     }
+
     .img-placeholder {
-      width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--line); border-radius: 4px;
+      width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--line); border-radius: 10px;
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
       background: var(--bg-alt); color: var(--ink-soft);
     }
@@ -91,28 +167,34 @@
     .img-placeholder .cap { font-size: 12px; text-align: center; padding: 0 12px; }
     .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
     .portrait-placeholder {
-      flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%;
+      flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
       border: 2px dashed var(--line); background: var(--white); color: var(--ink-soft);
       display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 14px oklch(23% 0.02 60 / 8%);
+    }
+    .bio-card {
+      background: var(--white); border-radius: 12px; padding: 20px; margin-top: 18px;
+      box-shadow: 0 4px 16px oklch(23% 0.02 60 / 7%);
     }
   </style>
 </helmet>
 
 <div class="wrap">
 
-  <!-- 1. ファーストビュー -->
-  <div class="pad" style="padding-top:48px;">
-    <div class="badge-row">
-      <span class="badge">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 6-9 6-9-6 9-6z"/><path d="M3 15l9 6 9-6"/></svg>
-        1級建築士
-      </span>
+  <!-- 1. ファーストビュー: 写真バナー + 重なるカード -->
+  <div class="hero-photo">
+    <div class="hero-badges">
+      <span class="badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 6-9 6-9-6 9-6z"/><path d="M3 15l9 6 9-6"/></svg>1級建築士</span>
       <span class="badge">インザホーム代表</span>
       <span class="badge">愛知県高浜市</span>
     </div>
+    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+    <div class="cap">写真プレースホルダー<br>(室内・リビングなどの施工事例)</div>
+  </div>
 
-    <h1 style="font-size:26px; margin-top:22px; font-weight:800;">
-      住宅会社を決める前に。<br>その比較、本当に同じ条件で<br>できていますか?
+  <div class="hero-card">
+    <h1 style="font-size:28px; font-weight:800; color:var(--ink);">
+      住宅会社を決める前に。<br>その比較、本当に<span style="color:var(--blue);">同じ条件</span>で<br>できていますか?
     </h1>
 
     <p style="margin-top:18px; font-size:15px;">
@@ -120,12 +202,7 @@
       無料相談で、今の状態が本当に比較できているかを確認してみませんか。
     </p>
 
-    <div class="img-placeholder" style="margin-top:22px;">
-      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-      <div class="cap">写真プレースホルダー<br>(室内・リビングなどの施工事例)</div>
-    </div>
-
-    <div style="margin-top:22px;">
+    <div style="margin-top:24px;">
       <a class="cta-btn" href="#">
         無料相談に申し込む
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -134,64 +211,65 @@
     </div>
   </div>
 
-  <div class="rule"></div>
-
   <!-- 2. 共感 -->
   <div class="pad">
+    <div class="num-mark">02</div>
     <div class="eyebrow">CHECK</div>
-    <h2 style="font-size:20px; margin-top:8px;">こんなことで悩んでいませんか?</h2>
+    <h2 class="section-title">こんなことで悩んでいませんか?</h2>
 
     <div style="margin-top:18px;">
       <div class="check-item">
-        <span class="check-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--wood)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span>
-        <p style="color:var(--ink); font-size:14px;">何を基準に住宅会社を決めればいいか、正直よく分からない</p>
+        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">何を基準に住宅会社を決めればいいか、正直よく分からない</p>
       </div>
       <div class="check-item">
-        <span class="check-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--wood)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span>
-        <p style="color:var(--ink); font-size:14px;">営業担当の説明は上手だけど、本当に信じていいのか不安</p>
+        <span class="check-badge blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">営業担当の説明は上手だけど、本当に信じていいのか不安</p>
       </div>
       <div class="check-item">
-        <span class="check-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--wood)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span>
-        <p style="color:var(--ink); font-size:14px;">見積書の「一式」という文字が多くて、何にいくらかかっているのか分からない</p>
+        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">見積書の「一式」という文字が多くて、何にいくらかかっているのか分からない</p>
       </div>
       <div class="check-item">
-        <span class="check-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--wood)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span>
-        <p style="color:var(--ink); font-size:14px;">「耐震等級3」「気密性能の数値」を見せられても、実際の住み心地との関係がピンとこない</p>
+        <span class="check-badge blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">「耐震等級3」「気密性能の数値」を見せられても、実際の住み心地との関係がピンとこない</p>
       </div>
       <div class="check-item">
-        <span class="check-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--wood)" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/></svg></span>
-        <p style="color:var(--ink); font-size:14px;">2社、3社と話を聞くほど、会社ごとに言うことが違って逆に迷ってしまう</p>
+        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">2社、3社と話を聞くほど、会社ごとに言うことが違って逆に迷ってしまう</p>
       </div>
     </div>
 
-    <p style="margin-top:16px; font-size:13px; color:var(--ink);">
+    <p style="margin-top:18px; font-size:13px; color:var(--ink); font-weight:700;">
       1つでも当てはまったら、続きを読んでみてください。
     </p>
   </div>
 
-  <!-- 3. 問題提起 -->
-  <div class="pad section-bg-alt">
-    <p style="font-size:14px;">無料相談には、こんな相談がよく来ます。</p>
+  <!-- 3. 問題提起(ダークバンド) -->
+  <div class="pad band-dark">
+    <div class="eyebrow on-dark">REALITY</div>
+    <p style="margin-top:14px; font-size:14px;">無料相談には、こんな相談がよく来ます。</p>
 
-    <div class="quote" style="margin-top:14px;">
+    <div class="quote" style="margin-top:16px;">
       「もう契約しちゃったんですけど、この間取りで大丈夫ですか?」
     </div>
 
-    <p style="margin-top:18px; font-size:14px;">
+    <p style="margin-top:20px; font-size:14px;">
       図面を見せてもらうと、構造的に無理のある間取りだったり、見積もりに大事な工事が
       入っていなかったりすることが、実は少なくありません。契約してから気づいても、
       直せることと直せないことがあります。柱の位置や構造は、建ててしまえば一生そのままです。
     </p>
 
-    <p style="margin-top:18px; font-size:16px; font-weight:700; color:var(--ink); font-family:'Shippori Mincho',serif;">
+    <p style="margin-top:20px; font-size:17px; font-weight:700; color:var(--white); font-family:'Shippori Mincho',serif;">
       でも、契約前ならまだ全部間に合います。
     </p>
   </div>
 
   <!-- 4. 解決策の提示 -->
   <div class="pad">
-    <div class="eyebrow">ABOUT</div>
-    <h2 style="font-size:20px; margin-top:8px;">家づくりサポートとは</h2>
+    <div class="num-mark">04</div>
+    <div class="eyebrow blue">ABOUT</div>
+    <h2 class="section-title">家づくりサポートとは</h2>
 
     <p style="margin-top:16px; font-size:14px;">
       住宅会社を否定するためのサービスではありません。今あなたが受けている提案を正しく理解して、
@@ -205,57 +283,59 @@
     </p>
 
     <div class="promise-box">
+      <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px;">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
+        <span style="font-weight:700; color:var(--ink); font-size:14px;">お約束</span>
+      </div>
       <p style="font-size:14px; color:var(--ink);">
-        そして、これだけは約束します。<strong>無料相談を受けたからといって、有料サポートを
-        無理に勧めることはありません。</strong>お話を伺って、今のあなたに必要ないと判断すれば、
-        そのこともきちんとお伝えします。売り込みたいわけじゃなくて、ちゃんと比較できる状態に
-        してから決めてほしい、それだけなんです。
+        <strong>無料相談を受けたからといって、有料サポートを無理に勧めることはありません。</strong>
+        お話を伺って、今のあなたに必要ないと判断すれば、そのこともきちんとお伝えします。
+        売り込みたいわけじゃなくて、ちゃんと比較できる状態にしてから決めてほしい、それだけなんです。
       </p>
     </div>
   </div>
 
-  <div class="rule"></div>
-
   <!-- 5. 無料相談で得られるもの -->
-  <div class="pad">
+  <div class="pad section-bg-alt">
+    <div class="num-mark">05</div>
     <div class="eyebrow">FREE CONSULTATION</div>
-    <h2 style="font-size:20px; margin-top:8px;">無料相談で得られるもの</h2>
+    <h2 class="section-title">無料相談で得られるもの</h2>
 
     <p style="margin-top:16px; font-size:14px;">無料相談では、こんなことを一緒に整理します。</p>
 
-    <div style="margin-top:14px; display:flex; flex-direction:column; gap:10px;">
-      <div style="display:flex; gap:10px;">
-        <svg width="16" height="16" style="flex:0 0 auto; margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-        <p style="font-size:14px; color:var(--ink);">今、家づくりがどこまで進んでいるかの確認</p>
+    <div style="margin-top:14px; display:flex; flex-direction:column; gap:2px;">
+      <div class="point-row" style="border:none; padding:10px 0;">
+        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">今、家づくりがどこまで進んでいるかの確認</p>
       </div>
-      <div style="display:flex; gap:10px;">
-        <svg width="16" height="16" style="flex:0 0 auto; margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-        <p style="font-size:14px; color:var(--ink);">今いちばん悩んでいることの整理</p>
+      <div class="point-row" style="border:none; padding:10px 0;">
+        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">今いちばん悩んでいることの整理</p>
       </div>
-      <div style="display:flex; gap:10px;">
-        <svg width="16" height="16" style="flex:0 0 auto; margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-        <p style="font-size:14px; color:var(--ink);">今の状態で、住宅会社を同じ条件で比較できているかの確認</p>
+      <div class="point-row" style="border:none; padding:10px 0;">
+        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">今の状態で、住宅会社を同じ条件で比較できているかの確認</p>
       </div>
-      <div style="display:flex; gap:10px;">
-        <svg width="16" height="16" style="flex:0 0 auto; margin-top:3px;" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
-        <p style="font-size:14px; color:var(--ink);">比較できていない部分と、次に確認すべきことの整理</p>
+      <div class="point-row" style="border:none; padding:10px 0;">
+        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
+        <p style="color:var(--ink);">比較できていない部分と、次に確認すべきことの整理</p>
       </div>
     </div>
 
-    <div style="margin-top:20px; padding:16px; background:var(--bg-alt); border-radius:4px;">
+    <div style="margin-top:20px; padding:18px; background:var(--white); border-radius:10px; box-shadow:0 2px 10px oklch(23% 0.02 60 / 6%);">
       <p style="font-size:13px;">
-        <strong style="color:var(--ink);">無料相談でやらないこと</strong>もお伝えしておきます。
+        <strong>無料相談でやらないこと</strong>もお伝えしておきます。
         図面の細かい添削や、見積書の項目ごとの査定、正式な比較表の作成までは、無料相談の範囲には
         含みません。まずは今の状況と悩みを整理する時間だと思ってください。
       </p>
     </div>
 
-    <p style="margin-top:16px; font-size:14px;">
+    <p style="margin-top:18px; font-size:14px;">
       そのうえで、「もっと詳しく確認してほしい」という方には、契約前まで一緒に確認していく
       サポートもご用意しています。必要な方にだけ、相談の中でご案内します。
     </p>
 
-    <div style="margin-top:24px;">
+    <div style="margin-top:26px;">
       <a class="cta-btn" href="#">
         無料相談に申し込む
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -264,28 +344,29 @@
     </div>
   </div>
 
-  <div class="rule"></div>
-
   <!-- 6. 権威性・実績 -->
-  <div class="pad section-bg-alt">
-    <div class="eyebrow">WHO WE ARE</div>
-    <h2 style="font-size:20px; margin-top:8px;">誰が相談に乗るのか</h2>
+  <div class="pad">
+    <div class="num-mark">06</div>
+    <div class="eyebrow blue">WHO WE ARE</div>
+    <h2 class="section-title">誰が相談に乗るのか</h2>
 
-    <div style="display:flex; align-items:center; gap:14px; margin-top:18px;">
-      <div class="portrait-placeholder">
-        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+    <div class="bio-card">
+      <div style="display:flex; align-items:center; gap:14px;">
+        <div class="portrait-placeholder">
+          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+        </div>
+        <div>
+          <div style="font-family:'Shippori Mincho',serif; font-size:16px; color:var(--ink); font-weight:700;">前田浩貴(まえちゃん)</div>
+          <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">写真プレースホルダー(本人ポートレート)</div>
+        </div>
       </div>
-      <div>
-        <div style="font-family:'Shippori Mincho',serif; font-size:16px; color:var(--ink);">前田浩貴(まえちゃん)</div>
-        <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">写真プレースホルダー(本人ポートレート)</div>
-      </div>
+
+      <p style="margin-top:18px; font-size:14px;">
+        1級建築士・1級建築施工管理技士の資格を持つ「まえちゃん」こと前田浩貴が中心となり、
+        インザホーム(愛知県高浜市)代表として、家事動線や収納など暮らしやすさを見る女性建築士2名を
+        含めた3名体制でサポートします。
+      </p>
     </div>
-
-    <p style="margin-top:18px; font-size:14px;">
-      1級建築士・1級建築施工管理技士の資格を持つ「まえちゃん」こと前田浩貴が中心となり、
-      インザホーム(愛知県高浜市)代表として、家事動線や収納など暮らしやすさを見る女性建築士2名を
-      含めた3名体制でサポートします。
-    </p>
 
     <div class="stat-row" style="margin-top:18px;">
       <div class="stat-card">
@@ -298,7 +379,7 @@
       </div>
     </div>
 
-    <p style="margin-top:18px; font-size:14px;">
+    <p style="margin-top:20px; font-size:14px;">
       現場監督として30年、設計だけでなく実際の施工まで見てきました。「設計は現場を知らず、
       現場は設計の意図を知らない」というのが、住宅業界でよく起きるすれ違いなんです。その両方を
       知っているからこそ、図面の上だけでは分からない問題にも気づけます。
@@ -310,7 +391,7 @@
       見てから決めていただいて大丈夫です。
     </p>
 
-    <div class="gallery-grid" style="margin-top:20px;">
+    <div class="gallery-grid" style="margin-top:22px;">
       <div class="img-placeholder square">
         <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
         <div class="cap">写真プレースホルダー<br>(外観・施工事例)</div>
@@ -323,86 +404,86 @@
   </div>
 
   <!-- 7. 相談で見ているポイント -->
-  <div class="pad">
+  <div class="pad section-bg-alt">
+    <div class="num-mark">07</div>
     <div class="eyebrow">WHAT WE CHECK</div>
-    <h2 style="font-size:20px; margin-top:8px;">相談でよく見ているポイント</h2>
+    <h2 class="section-title">相談でよく見ているポイント</h2>
 
     <p style="margin-top:16px; font-size:14px;">
       無料相談でよく確認しているのは、たとえばこんな視点です。
     </p>
 
-    <div style="margin-top:8px;">
+    <div style="margin-top:10px;">
       <div class="point-row">
-        <div class="point-num">01</div>
-        <p style="font-size:14px; color:var(--ink);">2階の柱が1階の柱の真上にちゃんと乗っているか(構造の安定性)</p>
+        <div class="point-badge">01</div>
+        <p style="color:var(--ink);">2階の柱が1階の柱の真上にちゃんと乗っているか(構造の安定性)</p>
       </div>
       <div class="point-row">
-        <div class="point-num">02</div>
-        <p style="font-size:14px; color:var(--ink);">見積書の「一式」表記の中に、何が含まれていて何が含まれていないか</p>
+        <div class="point-badge">02</div>
+        <p style="color:var(--ink);">見積書の「一式」表記の中に、何が含まれていて何が含まれていないか</p>
       </div>
       <div class="point-row">
-        <div class="point-num">03</div>
-        <p style="font-size:14px; color:var(--ink);">南北の窓の配置が、明るさだけでなく夏冬の快適さにどう影響するか</p>
+        <div class="point-badge">03</div>
+        <p style="color:var(--ink);">南北の窓の配置が、明るさだけでなく夏冬の快適さにどう影響するか</p>
       </div>
       <div class="point-row">
-        <div class="point-num">04</div>
-        <p style="font-size:14px; color:var(--ink);">住みはじめてから直せない部分(構造・断熱・気密)と、後から直せる部分の見分け方</p>
+        <div class="point-badge">04</div>
+        <p style="color:var(--ink);">住みはじめてから直せない部分(構造・断熱・気密)と、後から直せる部分の見分け方</p>
       </div>
     </div>
 
-    <p style="margin-top:16px; font-size:14px;">
+    <p style="margin-top:18px; font-size:14px;">
       図面や見積もりを見慣れていないと気づきにくいところを、建築士の目で一緒に確認します。
     </p>
   </div>
 
-  <div class="rule"></div>
-
   <!-- 8. FAQ -->
-  <div class="pad section-bg-alt">
-    <div class="eyebrow">FAQ</div>
-    <h2 style="font-size:20px; margin-top:8px;">よくある質問</h2>
+  <div class="pad">
+    <div class="num-mark">08</div>
+    <div class="eyebrow blue">FAQ</div>
+    <h2 class="section-title">よくある質問</h2>
 
-    <div style="margin-top:10px;">
+    <div style="margin-top:16px; display:flex; flex-direction:column;">
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-mark">Q</span><span>すでに住宅会社と契約していても相談できますか?</span></div>
-        <div class="faq-a"><span class="faq-a-mark">A</span><p style="font-size:13px;">はい、相談自体は可能です。ただし契約前の方が確認・修正できる範囲は広いので、「契約前に一度整理したい」という段階でのご相談をおすすめしています。</p></div>
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>すでに住宅会社と契約していても相談できますか?</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、相談自体は可能です。ただし契約前の方が確認・修正できる範囲は広いので、「契約前に一度整理したい」という段階でのご相談をおすすめしています。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-mark">Q</span><span>オンラインだけで完結しますか? 全国から相談できますか?</span></div>
-        <div class="faq-a"><span class="faq-a-mark">A</span><p style="font-size:13px;">はい、Zoomでの相談なので全国どこからでも申し込めます。</p></div>
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>オンラインだけで完結しますか? 全国から相談できますか?</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、Zoomでの相談なので全国どこからでも申し込めます。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-mark">Q</span><span>相談すると、必ず有料サポートを勧められますか?</span></div>
-        <div class="faq-a"><span class="faq-a-mark">A</span><p style="font-size:13px;">いいえ。無理な営業はしません。お話を伺って必要ないと判断すれば、正直にお伝えします。</p></div>
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>相談すると、必ず有料サポートを勧められますか?</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">いいえ。無理な営業はしません。お話を伺って必要ないと判断すれば、正直にお伝えします。</p></div>
       </div>
       <div class="faq-item">
-        <div class="faq-q"><span class="faq-q-mark">Q</span><span>本当に無料ですか? 時間はどれくらいかかりますか?</span></div>
-        <div class="faq-a"><span class="faq-a-mark">A</span><p style="font-size:13px;">無料相談は費用がかかりません。まずは今の状況と悩みを整理する時間としてお使いください。</p></div>
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>本当に無料ですか? 時間はどれくらいかかりますか?</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">無料相談は費用がかかりません。まずは今の状況と悩みを整理する時間としてお使いください。</p></div>
       </div>
     </div>
   </div>
 
-  <!-- 9. 最終CTA -->
-  <div class="pad" style="text-align:center;">
-    <h2 style="font-size:21px;">契約前に、一度立ち止まって<br>整理しませんか</h2>
+  <!-- 9. 最終CTA(ダークバンド) -->
+  <div class="pad band-dark" style="text-align:center;">
+    <h2 style="font-size:23px; color:var(--white);">契約前に、一度立ち止まって<br>整理しませんか</h2>
 
-    <p style="margin-top:16px; font-size:14px; text-align:left;">
+    <p style="margin-top:18px; font-size:14px; text-align:left;">
       比較の仕方に迷ったまま契約を進めるより、今の状態を一度、第三者の建築士と一緒に
       確認してみませんか。無理な営業は一切しません。まずは無料相談から。
     </p>
 
-    <div style="margin-top:24px;">
-      <a class="cta-btn" href="#">
+    <div style="margin-top:26px;">
+      <a class="cta-btn on-dark" href="#">
         無料相談に申し込む
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
       </a>
-      <div class="cta-note">※お申込み先URLは確定次第反映します</div>
+      <div class="cta-note on-dark">※お申込み先URLは確定次第反映します</div>
     </div>
   </div>
 
   <!-- 10. 法的表記・フッター -->
   <div class="footer pad" style="text-align:left;">
-    <div style="font-family:'Shippori Mincho',serif; font-size:15px; color:var(--white);">家づくりサポート</div>
+    <div style="font-family:'Shippori Mincho',serif; font-size:15px; color:var(--white); font-weight:700;">家づくりサポート</div>
     <p style="margin-top:14px; font-size:12px;">運営: インザホーム(前田浩貴)/ 愛知県高浜市</p>
     <div class="pending">住所・電話番号は確認中</div>
     <p style="margin-top:14px; font-size:12px;">
