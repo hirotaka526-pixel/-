@@ -10,17 +10,18 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
   <style>
     :root {
-      --bg: oklch(98% 0.012 80);
-      --bg-alt: oklch(95.5% 0.014 75);
+      --bg: oklch(97% 0.02 75);
+      --bg-alt: oklch(94.5% 0.028 65);
+      --cream: oklch(95.5% 0.035 70);
       --ink: oklch(21% 0.022 60);
       --ink-soft: oklch(42% 0.02 60);
-      --line: oklch(88% 0.012 75);
+      --line: oklch(87% 0.018 70);
       --blue: oklch(42% 0.075 235);
-      --blue-soft: oklch(93% 0.02 235);
+      --blue-soft: oklch(93% 0.025 235);
       --blue-light: oklch(80% 0.06 235);
-      --wood: oklch(52% 0.09 50);
-      --wood-soft: oklch(93% 0.03 55);
-      --wood-light: oklch(80% 0.075 55);
+      --wood: oklch(53% 0.11 42);
+      --wood-soft: oklch(92% 0.045 55);
+      --wood-light: oklch(80% 0.08 50);
       --white: oklch(100% 0 0);
     }
     * { box-sizing: border-box; }
@@ -48,7 +49,16 @@
     .eyebrow.blue { background: var(--blue-soft); color: var(--blue); }
     .eyebrow.on-dark { background: rgba(255,255,255,0.12); color: var(--wood-light); }
     .eyebrow.on-dark.blue { color: var(--blue-light); }
+    .kicker {
+      display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
+      color: var(--wood); text-transform: uppercase; margin-bottom: 10px;
+    }
     h2.section-title { font-size: 23px; margin-top: 10px; color: var(--ink); }
+    .tag-free {
+      display: inline-flex; align-items: center; gap: 6px; background: var(--wood);
+      color: var(--white); font-size: 12px; font-weight: 700; padding: 6px 14px;
+      border-radius: 999px; margin-top: 16px;
+    }
 
     .cta-btn {
       display: flex; align-items: center; justify-content: center; gap: 10px;
@@ -67,7 +77,7 @@
     /* Hero: photo + overlapping card */
     .hero-photo {
       position: relative; width: 100%; aspect-ratio: 4 / 5;
-      background: linear-gradient(160deg, oklch(30% 0.03 60), oklch(20% 0.02 60));
+      background: linear-gradient(160deg, oklch(32% 0.045 50), oklch(19% 0.025 55));
       display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
       color: rgba(255,255,255,0.55);
     }
@@ -147,7 +157,31 @@
     .qa-mark.q { background: var(--blue); color: var(--white); }
     .qa-mark.a { background: var(--wood-soft); color: var(--wood); }
 
-    .section-bg-alt { background: var(--bg-alt); }
+    .section-bg-alt {
+      background:
+        radial-gradient(circle at 12% 0%, oklch(97% 0.05 60 / 70%), transparent 55%),
+        var(--bg-alt);
+    }
+    .band-dark {
+      background:
+        radial-gradient(circle at 85% 0%, oklch(50% 0.09 45 / 25%), transparent 50%),
+        var(--ink);
+    }
+
+    .feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .feature-card {
+      background: var(--white); border-radius: 12px; padding: 18px 14px;
+      box-shadow: 0 4px 14px oklch(23% 0.02 60 / 7%);
+    }
+    .feature-card .feature-icon {
+      width: 34px; height: 34px; border-radius: 50%; background: var(--blue-soft);
+      color: var(--blue); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 10px;
+    }
+    .feature-card p { font-size: 13px; color: var(--ink); line-height: 1.6; }
+
+    .faq-item.cream { background: var(--cream); }
+    .faq-item.blue-tint { background: var(--blue-soft); }
 
     .footer { background: oklch(14% 0.018 60); color: oklch(85% 0.01 75); }
     .footer p, .footer .fine { color: oklch(66% 0.012 75); }
@@ -193,6 +227,7 @@
   </div>
 
   <div class="hero-card">
+    <span class="kicker">IE ZUKURI SUPPORT</span>
     <h1 style="font-size:28px; font-weight:800; color:var(--ink);">
       住宅会社を決める前に。<br>その比較、本当に<span style="color:var(--blue);">同じ条件</span>で<br>できていますか?
     </h1>
@@ -202,7 +237,12 @@
       無料相談で、今の状態が本当に比較できているかを確認してみませんか。
     </p>
 
-    <div style="margin-top:24px;">
+    <span class="tag-free">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
+      相談料 0円
+    </span>
+
+    <div style="margin-top:20px;">
       <a class="cta-btn" href="#">
         無料相談に申し込む
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -303,22 +343,22 @@
 
     <p style="margin-top:16px; font-size:14px;">無料相談では、こんなことを一緒に整理します。</p>
 
-    <div style="margin-top:14px; display:flex; flex-direction:column; gap:2px;">
-      <div class="point-row" style="border:none; padding:10px 0;">
-        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">今、家づくりがどこまで進んでいるかの確認</p>
+    <div class="feature-grid" style="margin-top:16px;">
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <p>今、家づくりがどこまで進んでいるかの確認</p>
       </div>
-      <div class="point-row" style="border:none; padding:10px 0;">
-        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">今いちばん悩んでいることの整理</p>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></div>
+        <p>今いちばん悩んでいることの整理</p>
       </div>
-      <div class="point-row" style="border:none; padding:10px 0;">
-        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">今の状態で、住宅会社を同じ条件で比較できているかの確認</p>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-4"/><path d="M17 3h4v4M21 3l-9 9"/></svg></div>
+        <p>住宅会社を同じ条件で比較できているかの確認</p>
       </div>
-      <div class="point-row" style="border:none; padding:10px 0;">
-        <span class="point-badge"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">比較できていない部分と、次に確認すべきことの整理</p>
+      <div class="feature-card">
+        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4v16h16v-7"/><path d="M17.5 3.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg></div>
+        <p>比較できていない部分と、次に確認すべきことの整理</p>
       </div>
     </div>
 
@@ -444,19 +484,19 @@
     <h2 class="section-title">よくある質問</h2>
 
     <div style="margin-top:16px; display:flex; flex-direction:column;">
-      <div class="faq-item">
+      <div class="faq-item cream">
         <div class="faq-q"><span class="qa-mark q">Q</span><span>すでに住宅会社と契約していても相談できますか?</span></div>
         <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、相談自体は可能です。ただし契約前の方が確認・修正できる範囲は広いので、「契約前に一度整理したい」という段階でのご相談をおすすめしています。</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item blue-tint">
         <div class="faq-q"><span class="qa-mark q">Q</span><span>オンラインだけで完結しますか? 全国から相談できますか?</span></div>
         <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、Zoomでの相談なので全国どこからでも申し込めます。</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item cream">
         <div class="faq-q"><span class="qa-mark q">Q</span><span>相談すると、必ず有料サポートを勧められますか?</span></div>
         <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">いいえ。無理な営業はしません。お話を伺って必要ないと判断すれば、正直にお伝えします。</p></div>
       </div>
-      <div class="faq-item">
+      <div class="faq-item blue-tint">
         <div class="faq-q"><span class="qa-mark q">Q</span><span>本当に無料ですか? 時間はどれくらいかかりますか?</span></div>
         <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">無料相談は費用がかかりません。まずは今の状況と悩みを整理する時間としてお使いください。</p></div>
       </div>
