@@ -81,6 +81,20 @@
       display: inline-block; margin-top: 6px; font-size: 11px; padding: 3px 8px;
       border: 1px dashed oklch(55% 0.01 75); border-radius: 999px; color: oklch(80% 0.01 75);
     }
+    .img-placeholder {
+      width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--line); border-radius: 4px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+      background: var(--bg-alt); color: var(--ink-soft);
+    }
+    .img-placeholder.square { aspect-ratio: 1 / 1; }
+    .img-placeholder svg { color: var(--wood); }
+    .img-placeholder .cap { font-size: 12px; text-align: center; padding: 0 12px; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+    .portrait-placeholder {
+      flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%;
+      border: 2px dashed var(--line); background: var(--white); color: var(--ink-soft);
+      display: flex; align-items: center; justify-content: center;
+    }
   </style>
 </helmet>
 
@@ -106,7 +120,12 @@
       無料相談で、今の状態が本当に比較できているかを確認してみませんか。
     </p>
 
-    <div style="margin-top:26px;">
+    <div class="img-placeholder" style="margin-top:22px;">
+      <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+      <div class="cap">写真プレースホルダー<br>(室内・リビングなどの施工事例)</div>
+    </div>
+
+    <div style="margin-top:22px;">
       <a class="cta-btn" href="#">
         無料相談に申し込む
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
@@ -252,7 +271,17 @@
     <div class="eyebrow">WHO WE ARE</div>
     <h2 style="font-size:20px; margin-top:8px;">誰が相談に乗るのか</h2>
 
-    <p style="margin-top:16px; font-size:14px;">
+    <div style="display:flex; align-items:center; gap:14px; margin-top:18px;">
+      <div class="portrait-placeholder">
+        <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </div>
+      <div>
+        <div style="font-family:'Shippori Mincho',serif; font-size:16px; color:var(--ink);">前田浩貴(まえちゃん)</div>
+        <div style="font-size:12px; color:var(--ink-soft); margin-top:2px;">写真プレースホルダー(本人ポートレート)</div>
+      </div>
+    </div>
+
+    <p style="margin-top:18px; font-size:14px;">
       1級建築士・1級建築施工管理技士の資格を持つ「まえちゃん」こと前田浩貴が中心となり、
       インザホーム(愛知県高浜市)代表として、家事動線や収納など暮らしやすさを見る女性建築士2名を
       含めた3名体制でサポートします。
@@ -280,6 +309,17 @@
       家づくりの基準や住宅会社に確認すべきことを発信しています。相談する前に、どんな人間か
       見てから決めていただいて大丈夫です。
     </p>
+
+    <div class="gallery-grid" style="margin-top:20px;">
+      <div class="img-placeholder square">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+        <div class="cap">写真プレースホルダー<br>(外観・施工事例)</div>
+      </div>
+      <div class="img-placeholder square">
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
+        <div class="cap">写真プレースホルダー<br>(外観・施工事例)</div>
+      </div>
+    </div>
   </div>
 
   <!-- 7. 相談で見ているポイント -->
