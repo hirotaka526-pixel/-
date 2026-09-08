@@ -7,530 +7,628 @@
 <body>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;600;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Zen+Maru+Gothic:wght@700;900&display=swap">
   <style>
     :root {
-      --bg: oklch(97% 0.02 75);
-      --bg-alt: oklch(94.5% 0.028 65);
-      --cream: oklch(95.5% 0.035 70);
-      --ink: oklch(21% 0.022 60);
-      --ink-soft: oklch(42% 0.02 60);
-      --line: oklch(87% 0.018 70);
-      --blue: oklch(42% 0.075 235);
-      --blue-soft: oklch(93% 0.025 235);
-      --blue-light: oklch(80% 0.06 235);
-      --wood: oklch(53% 0.11 42);
-      --wood-soft: oklch(92% 0.045 55);
-      --wood-light: oklch(80% 0.08 50);
-      --white: oklch(100% 0 0);
+      --cream: #f5f2ea;
+      --cream-2: #eee8d9;
+      --green: #315e58;
+      --green-deep: #263d39;
+      --green-dark: #1c2f2b;
+      --gold: #bfa66b;
+      --gold-soft: #ece3cc;
+      --gray: #68736e;
+      --white: #ffffff;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--bg); color: var(--ink); font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif; font-size: 15px; -webkit-font-smoothing: antialiased; }
-    h1, h2, h3 { font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif; margin: 0; line-height: 1.5; letter-spacing: 0.01em; }
-    p { margin: 0; line-height: 1.95; color: var(--ink-soft); }
-    strong { color: var(--ink); font-weight: 700; }
-    a { color: var(--blue); }
-    a:hover { color: oklch(32% 0.075 235); }
-    .wrap { max-width: 430px; margin: 0 auto; background: var(--bg); overflow: hidden; }
-    .pad { position: relative; padding: 48px 24px; overflow: hidden; }
-    .rule { height: 1px; background: var(--line); }
+    body { margin: 0; background: var(--cream); color: var(--green-deep); font-family: "Zen Kaku Gothic New", "Hiragino Sans", sans-serif; font-size: 15px; -webkit-font-smoothing: antialiased; }
+    h1, h2, h3 { font-family: "Zen Kaku Gothic New", sans-serif; font-weight: 900; margin: 0; line-height: 1.45; }
+    p { margin: 0; line-height: 1.9; color: var(--green-deep); }
+    strong { font-weight: 700; }
+    a { color: inherit; text-decoration: none; }
+    .num-font { font-family: "Zen Maru Gothic", sans-serif; }
+    .wrap { max-width: 440px; margin: 0 auto; background: var(--cream); overflow: hidden; }
+    .pad { position: relative; padding: 40px 26px; overflow: hidden; }
 
-    .num-mark {
-      position: absolute; top: 8px; right: 18px; font-family: "Shippori Mincho", serif;
-      font-size: 68px; font-weight: 800; color: var(--ink); opacity: 0.05; line-height: 1;
-      pointer-events: none; z-index: 0;
-    }
-    .pad > * { position: relative; z-index: 1; }
+    .eyebrow { font-size: 13px; font-weight: 700; color: var(--gold); letter-spacing: 0.02em; }
+    .brand-tag { font-size: 12px; font-weight: 700; color: var(--gray); }
 
-    .eyebrow {
-      display: inline-block; font-size: 11px; letter-spacing: 0.16em; font-weight: 700;
-      padding: 5px 12px; border-radius: 999px; background: var(--wood-soft); color: var(--wood);
+    .rule-gold { height: 3px; background: var(--gold); border-radius: 2px; }
+    .rule-thin { height: 1px; background: rgba(191,166,107,0.4); }
+
+    /* CTA */
+    .line-cta {
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      width: 100%; padding: 18px 18px; border-radius: 999px;
+      background: var(--green); color: var(--white); font-weight: 700; font-size: 16px;
+      box-shadow: 0 8px 20px rgba(38,61,57,0.28);
     }
-    .eyebrow.blue { background: var(--blue-soft); color: var(--blue); }
-    .eyebrow.on-dark { background: rgba(255,255,255,0.12); color: var(--wood-light); }
-    .eyebrow.on-dark.blue { color: var(--blue-light); }
-    .kicker {
-      display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.24em;
-      color: var(--wood); text-transform: uppercase; margin-bottom: 10px;
+    .line-badge {
+      flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%; background: var(--white);
+      color: var(--green); font-size: 11px; font-weight: 900; display: flex; align-items: center; justify-content: center;
+      letter-spacing: 0.02em;
     }
-    h2.section-title { font-size: 23px; margin-top: 10px; color: var(--ink); }
-    .tag-free {
-      display: inline-flex; align-items: center; gap: 6px; background: var(--wood);
-      color: var(--white); font-size: 12px; font-weight: 700; padding: 6px 14px;
-      border-radius: 999px; margin-top: 16px;
+    .cta-note { margin-top: 10px; font-size: 11px; color: var(--gray); text-align: center; }
+
+    /* Numbers */
+    .big-num {
+      font-family: "Zen Maru Gothic", sans-serif; font-weight: 900; color: var(--gold);
+      font-size: 46px; line-height: 1; opacity: 0.9;
     }
 
-    .cta-btn {
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      width: 100%; padding: 19px 20px; border-radius: 8px;
-      background: var(--blue); color: var(--white); font-weight: 700; font-size: 16px;
-      letter-spacing: 0.03em; border: none; text-decoration: none; font-family: inherit;
-      box-shadow: 0 10px 24px oklch(42% 0.075 235 / 32%);
+    /* Step list */
+    .step { display: flex; gap: 14px; align-items: flex-start; padding: 10px 0; }
+    .step-num {
+      flex: 0 0 auto; width: 26px; height: 26px; border-radius: 50%; background: var(--gold-soft);
+      color: var(--gold); font-family: "Zen Maru Gothic", sans-serif; font-weight: 900; font-size: 13px;
+      display: flex; align-items: center; justify-content: center;
     }
-    .cta-btn.on-dark { background: var(--white); color: var(--ink); box-shadow: 0 10px 24px rgba(0,0,0,0.35); }
-    .cta-note {
-      margin-top: 10px; font-size: 12px; color: var(--ink-soft); text-align: center;
-      border: 1px dashed var(--line); border-radius: 4px; padding: 8px 10px; background: var(--bg-alt);
-    }
-    .cta-note.on-dark { color: rgba(255,255,255,0.55); border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.06); }
+    .step p { font-size: 14px; font-weight: 700; color: var(--green-deep); }
 
-    /* Hero: photo + overlapping card */
-    .hero-photo {
-      position: relative; width: 100%; aspect-ratio: 4 / 5;
-      background: linear-gradient(160deg, oklch(32% 0.045 50), oklch(19% 0.025 55));
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px;
-      color: rgba(255,255,255,0.55);
+    /* callout */
+    .callout {
+      background: var(--green); color: var(--white); border-radius: 16px; padding: 22px;
+      text-align: center; font-weight: 700; font-size: 15px; line-height: 1.8;
     }
-    .hero-photo .cap { font-size: 12px; text-align: center; color: rgba(255,255,255,0.55); }
-    .hero-badges {
-      position: absolute; top: 20px; left: 20px; right: 20px; z-index: 2;
-      display: flex; flex-wrap: wrap; gap: 8px;
+    .callout.gold { background: var(--gold-soft); color: var(--green-deep); }
+
+    .exclude-note {
+      margin-top: 16px; font-size: 12px; color: var(--gray); text-align: center; font-weight: 700;
     }
+
+    /* photo placeholder */
+    .photo-ph {
+      width: 100%; aspect-ratio: 4 / 3; border-radius: 18px; border: 2px dashed var(--gold);
+      background: var(--gold-soft); display: flex; flex-direction: column; align-items: center;
+      justify-content: center; gap: 10px; color: var(--green);
+    }
+    .photo-ph .cap { font-size: 12px; text-align: center; padding: 0 16px; color: var(--green); }
+
+    /* service card icon */
+    .svc-icon {
+      width: 56px; height: 56px; border-radius: 16px; background: var(--green);
+      color: var(--white); display: flex; align-items: center; justify-content: center;
+    }
+
+    .badge-row { display: flex; flex-wrap: wrap; gap: 8px; }
     .badge {
       display: inline-flex; align-items: center; gap: 6px; padding: 7px 13px;
-      border-radius: 999px; font-size: 12px; font-weight: 600;
-      color: var(--ink); background: rgba(255,255,255,0.92);
-      backdrop-filter: blur(4px);
-    }
-    .hero-card {
-      position: relative; margin-top: -32px; background: var(--bg);
-      border-radius: 26px 26px 0 0; padding: 38px 24px 42px; z-index: 3;
-      box-shadow: 0 -16px 32px rgba(0,0,0,0.10);
+      border-radius: 999px; font-size: 12px; font-weight: 700;
+      color: var(--green); background: var(--white); border: 1px solid var(--gold-soft);
     }
 
-    .badge.strong { background: var(--blue); color: var(--white); border-color: var(--blue); font-weight: 700; }
-    .check-item { display: flex; gap: 14px; align-items: flex-start; padding: 15px 0; }
-    .check-item + .check-item { border-top: 1px solid var(--line); }
-    .check-badge {
-      flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .check-badge.wood { background: var(--wood-soft); color: var(--wood); }
-    .check-badge.blue { background: var(--blue-soft); color: var(--blue); }
-
-    .quote {
-      position: relative; padding: 6px 4px 4px 22px; font-family: "Shippori Mincho", serif;
-      font-size: 19px; font-weight: 600; line-height: 1.75; color: var(--white);
-    }
-    .quote::before {
-      content: ""; position: absolute; left: 0; top: 2px; bottom: 2px; width: 4px;
-      border-radius: 2px; background: var(--wood-light);
-    }
-    .band-dark {
-      background: var(--ink); color: rgba(255,255,255,0.78);
-    }
-    .band-dark p { color: rgba(255,255,255,0.78); }
-    .band-dark .num-mark { color: var(--white); }
-
-    .promise-box {
-      background: var(--blue-soft); border-radius: 10px; padding: 22px; margin-top: 20px;
-      border: 1px solid oklch(85% 0.03 235);
-    }
-    .stat-row { display: flex; gap: 14px; }
-    .stat-card {
-      flex: 1; background: var(--white); border-top: 3px solid var(--blue); border-radius: 8px;
-      padding: 18px 14px; box-shadow: 0 4px 14px oklch(23% 0.02 60 / 7%);
-    }
-    .stat-num { font-family: "Shippori Mincho", serif; font-size: 28px; font-weight: 800; color: var(--blue); }
-    .stat-label { font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
-
-    .point-row { display: flex; gap: 14px; padding: 13px 0; align-items: flex-start; }
-    .point-row + .point-row { border-top: 1px solid var(--line); }
-    .point-badge {
-      flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--blue-soft);
-      display: flex; align-items: center; justify-content: center;
-      font-family: "Shippori Mincho", serif; font-size: 13px; font-weight: 700; color: var(--blue);
-    }
-
-    .faq-item {
-      padding: 18px 18px; background: var(--white); border-radius: 10px;
-      box-shadow: 0 2px 10px oklch(23% 0.02 60 / 6%);
-    }
-    .faq-item + .faq-item { margin-top: 12px; }
-    .faq-q { display: flex; gap: 12px; font-weight: 700; font-size: 15px; color: var(--ink); }
-    .faq-a { display: flex; gap: 12px; margin-top: 10px; font-size: 14px; }
+    .faq-item { padding: 18px 0; }
+    .faq-item + .faq-item { border-top: 1px solid rgba(191,166,107,0.35); }
+    .faq-q { display: flex; gap: 10px; font-weight: 900; font-size: 15px; color: var(--green); }
+    .faq-a { display: flex; gap: 10px; margin-top: 8px; font-size: 13.5px; }
     .qa-mark {
       flex: 0 0 auto; width: 24px; height: 24px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      font-family: "Shippori Mincho", serif; font-size: 13px; font-weight: 700;
+      font-family: "Zen Maru Gothic", sans-serif; font-weight: 900; font-size: 13px;
     }
-    .qa-mark.q { background: var(--blue); color: var(--white); }
-    .qa-mark.a { background: var(--wood-soft); color: var(--wood); }
+    .qa-mark.q { background: var(--green); color: var(--white); }
+    .qa-mark.a { background: var(--gold-soft); color: var(--green); }
 
-    .section-bg-alt {
-      background:
-        radial-gradient(circle at 12% 0%, oklch(97% 0.05 60 / 70%), transparent 55%),
-        var(--bg-alt);
-    }
-    .band-dark {
-      background:
-        radial-gradient(circle at 85% 0%, oklch(50% 0.09 45 / 25%), transparent 50%),
-        var(--ink);
-    }
-
-    .feature-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .feature-card {
-      background: var(--white); border-radius: 12px; padding: 18px 14px;
-      box-shadow: 0 4px 14px oklch(23% 0.02 60 / 7%);
-    }
-    .feature-card .feature-icon {
-      width: 34px; height: 34px; border-radius: 50%; background: var(--blue-soft);
-      color: var(--blue); display: flex; align-items: center; justify-content: center;
-      margin-bottom: 10px;
-    }
-    .feature-card p { font-size: 13px; color: var(--ink); line-height: 1.6; }
-
-    .faq-item.cream { background: var(--cream); }
-    .faq-item.blue-tint { background: var(--blue-soft); }
-
-    .footer { background: oklch(14% 0.018 60); color: oklch(85% 0.01 75); }
-    .footer p, .footer .fine { color: oklch(66% 0.012 75); }
-    .footer .fine { font-size: 11px; line-height: 1.8; }
-    .pending {
-      display: inline-block; margin-top: 6px; font-size: 11px; padding: 3px 8px;
-      border: 1px dashed oklch(45% 0.01 75); border-radius: 999px; color: oklch(70% 0.01 75);
-    }
-
-    .img-placeholder {
-      width: 100%; aspect-ratio: 4 / 3; border: 2px dashed var(--line); border-radius: 10px;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
-      background: var(--bg-alt); color: var(--ink-soft);
-    }
-    .img-placeholder.square { aspect-ratio: 1 / 1; }
-    .img-placeholder svg { color: var(--wood); }
-    .img-placeholder .cap { font-size: 12px; text-align: center; padding: 0 12px; }
-    .gallery-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-    .portrait-placeholder {
-      flex: 0 0 auto; width: 88px; height: 88px; border-radius: 50%;
-      border: 2px dashed var(--line); background: var(--white); color: var(--ink-soft);
+    .flow-item { display: flex; gap: 16px; align-items: flex-start; padding: 14px 0; }
+    .flow-item + .flow-item { border-top: 1px dashed rgba(191,166,107,0.5); }
+    .flow-num {
+      flex: 0 0 auto; width: 32px; height: 32px; border-radius: 50%; background: var(--green);
+      color: var(--white); font-family: "Zen Maru Gothic", sans-serif; font-weight: 900; font-size: 14px;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 14px oklch(23% 0.02 60 / 8%);
     }
-    .bio-card {
-      background: var(--white); border-radius: 12px; padding: 20px; margin-top: 18px;
-      box-shadow: 0 4px 16px oklch(23% 0.02 60 / 7%);
-    }
+
+    .footer { background: var(--green-dark); color: rgba(255,255,255,0.75); text-align: center; }
+    .footer p { color: rgba(255,255,255,0.6); }
   </style>
 </helmet>
 
 <div class="wrap">
 
-  <!-- 1. ファーストビュー: 写真バナー + 重なるカード -->
-  <div class="hero-photo">
-    <div class="hero-badges">
-      <span class="badge"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l9 6-9 6-9-6 9-6z"/><path d="M3 15l9 6 9-6"/></svg>1級建築士</span>
-      <span class="badge">インザホーム代表</span>
-      <span class="badge">愛知県高浜市</span>
-    </div>
-    <svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-    <div class="cap">写真プレースホルダー<br>(室内・リビングなどの施工事例)</div>
-  </div>
-
-  <div class="hero-card">
-    <span class="kicker">IE ZUKURI SUPPORT</span>
-    <h1 style="font-size:28px; font-weight:800; color:var(--ink);">
-      住宅会社を決める前に。<br>その比較、本当に<span style="color:var(--blue);">同じ条件</span>で<br>できていますか?
+  <!-- HERO -->
+  <div class="pad" style="padding-top:44px; text-align:center;">
+    <p class="eyebrow">まえちゃん｜家づくり丸ごとサポートする建築士</p>
+    <h1 style="font-size:27px; margin-top:14px; color:var(--green);">
+      その会社で本当にいいか<br><span style="color:var(--gold);">建築士と一緒に</span>整理しませんか
     </h1>
 
-    <p style="margin-top:18px; font-size:15px;">
-      1級建築士と女性建築士2名が、あなたの家づくりを住宅会社とは別の立場で整理します。
-      無料相談で、今の状態が本当に比較できているかを確認してみませんか。
-    </p>
+    <div style="margin-top:22px;">
+      <div class="photo-ph" style="aspect-ratio:16/11;">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M12 20c0-3.5 2.7-6 6-6"/></svg>
+        <div class="cap">写真プレースホルダー<br>(相談風景・建築士3名)</div>
+      </div>
+    </div>
 
-    <span class="tag-free">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M20 6L9 17l-5-5"/></svg>
-      相談料 0円
-    </span>
+    <div style="margin-top:22px; padding:20px; background:var(--white); border:1px solid var(--gold-soft); border-radius:16px; text-align:left;">
+      <p style="font-size:14px; font-weight:700; color:var(--green);">
+        間取り・見積もり・性能・仕様を<br>建築士3名が分かりやすく整理
+      </p>
+      <p style="margin-top:8px; font-size:12px; color:var(--gray);">1級建築士まえちゃん＋女性建築士2名</p>
+    </div>
 
     <div style="margin-top:20px;">
-      <a class="cta-btn" href="#">
-        無料相談に申し込む
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        無料相談で今の状況を整理する
       </a>
-      <div class="cta-note">※お申込み先URLは確定次第反映します</div>
     </div>
   </div>
 
-  <!-- 2. 共感 -->
-  <div class="pad">
-    <div class="num-mark">02</div>
-    <div class="eyebrow">CHECK</div>
-    <h2 class="section-title">こんなことで悩んでいませんか?</h2>
+  <!-- 01: なぜ比較できないか -->
+  <div class="pad" style="background:var(--white);">
+    <div class="big-num">01</div>
+    <h2 style="font-size:21px; margin-top:6px; color:var(--green);">
+      その不安は知識不足ではなく<br>比較できない仕組みが原因です
+    </h2>
+    <p style="margin-top:14px; font-size:14px;">
+      見積もりの書式、標準仕様、会社ごとのルール、間取り条件が違うため、
+      総額や性能値だけでは公平に判断できません。
+    </p>
+
+    <div style="margin-top:20px; display:flex; flex-direction:column; gap:12px;">
+      <div style="padding:16px; background:var(--cream); border-radius:14px;">
+        <p style="font-size:13px; font-weight:900; color:var(--gold);">見積もり</p>
+        <p style="margin-top:6px; font-size:13.5px;">工事範囲と一式表記が違う。見積書の書き方も会社ごとに違うし、専門用語があって比べられない</p>
+      </div>
+      <div style="padding:16px; background:var(--cream); border-radius:14px;">
+        <p style="font-size:13px; font-weight:900; color:var(--gold);">性能・仕様</p>
+        <p style="margin-top:6px; font-size:13.5px;">標準とオプションの範囲が違う。どこも同じようなことを言うから分からない</p>
+      </div>
+      <div style="padding:16px; background:var(--cream); border-radius:14px;">
+        <p style="font-size:13px; font-weight:900; color:var(--gold);">間取り</p>
+        <p style="margin-top:6px; font-size:13.5px;">自分たちに合う間取りってどんな? 営業マンの間取りでは満足できない</p>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:22px;">
+      まずは無料相談で、今そろっていない判断材料を<br>まえちゃんと一緒に整理しましょう!
+    </div>
 
     <div style="margin-top:18px;">
-      <div class="check-item">
-        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">何を基準に住宅会社を決めればいいか、正直よく分からない</p>
-      </div>
-      <div class="check-item">
-        <span class="check-badge blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">営業担当の説明は上手だけど、本当に信じていいのか不安</p>
-      </div>
-      <div class="check-item">
-        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">見積書の「一式」という文字が多くて、何にいくらかかっているのか分からない</p>
-      </div>
-      <div class="check-item">
-        <span class="check-badge blue"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">「耐震等級3」「気密性能の数値」を見せられても、実際の住み心地との関係がピンとこない</p>
-      </div>
-      <div class="check-item">
-        <span class="check-badge wood"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg></span>
-        <p style="color:var(--ink);">2社、3社と話を聞くほど、会社ごとに言うことが違って逆に迷ってしまう</p>
-      </div>
-    </div>
-
-    <p style="margin-top:18px; font-size:13px; color:var(--ink); font-weight:700;">
-      1つでも当てはまったら、続きを読んでみてください。
-    </p>
-  </div>
-
-  <!-- 3. 問題提起(ダークバンド) -->
-  <div class="pad band-dark">
-    <div class="eyebrow on-dark">REALITY</div>
-    <p style="margin-top:14px; font-size:14px;">無料相談には、こんな相談がよく来ます。</p>
-
-    <div class="quote" style="margin-top:16px;">
-      「もう契約しちゃったんですけど、この間取りで大丈夫ですか?」
-    </div>
-
-    <p style="margin-top:20px; font-size:14px;">
-      図面を見せてもらうと、構造的に無理のある間取りだったり、見積もりに大事な工事が
-      入っていなかったりすることが、実は少なくありません。契約してから気づいても、
-      直せることと直せないことがあります。柱の位置や構造は、建ててしまえば一生そのままです。
-    </p>
-
-    <p style="margin-top:20px; font-size:17px; font-weight:700; color:var(--white); font-family:'Shippori Mincho',serif;">
-      でも、契約前ならまだ全部間に合います。
-    </p>
-  </div>
-
-  <!-- 4. 解決策の提示 -->
-  <div class="pad">
-    <div class="num-mark">04</div>
-    <div class="eyebrow blue">ABOUT</div>
-    <h2 class="section-title">家づくりサポートとは</h2>
-
-    <p style="margin-top:16px; font-size:14px;">
-      住宅会社を否定するためのサービスではありません。今あなたが受けている提案を正しく理解して、
-      家族が納得して判断できる状態を一緒に作るサポートです。(もちろん、土地の契約など戻せない
-      部分もありますが、間取りや構造、仕様はまだ調整できることが多いです)
-    </p>
-
-    <p style="margin-top:16px; font-size:14px;">
-      私たちは住宅会社から紹介料を受け取る立場ではありません。だからこそ、営業トークではなく
-      建築士として、間取り・見積もり・性能を第三者の目で見ることができます。
-    </p>
-
-    <div class="promise-box">
-      <div style="display:flex; gap:10px; align-items:center; margin-bottom:8px;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18.5 21 12 16.5 5.5 21l2-7.5L2 9h7z"/></svg>
-        <span style="font-weight:700; color:var(--ink); font-size:14px;">お約束</span>
-      </div>
-      <p style="font-size:14px; color:var(--ink);">
-        <strong>無料相談を受けたからといって、有料サポートを無理に勧めることはありません。</strong>
-        お話を伺って、今のあなたに必要ないと判断すれば、そのこともきちんとお伝えします。
-        売り込みたいわけじゃなくて、ちゃんと比較できる状態にしてから決めてほしい、それだけなんです。
-      </p>
-    </div>
-  </div>
-
-  <!-- 5. 無料相談で得られるもの -->
-  <div class="pad section-bg-alt">
-    <div class="num-mark">05</div>
-    <div class="eyebrow">FREE CONSULTATION</div>
-    <h2 class="section-title">無料相談で得られるもの</h2>
-
-    <p style="margin-top:16px; font-size:14px;">無料相談では、こんなことを一緒に整理します。</p>
-
-    <div class="feature-grid" style="margin-top:16px;">
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
-        <p>今、家づくりがどこまで進んでいるかの確認</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a4 4 0 017-2.6A4 4 0 0119 11c0 5.5-7 10-7 10z"/></svg></div>
-        <p>今いちばん悩んでいることの整理</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 3H5a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-4"/><path d="M17 3h4v4M21 3l-9 9"/></svg></div>
-        <p>住宅会社を同じ条件で比較できているかの確認</p>
-      </div>
-      <div class="feature-card">
-        <div class="feature-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4v16h16v-7"/><path d="M17.5 3.5a2.1 2.1 0 013 3L12 15l-4 1 1-4z"/></svg></div>
-        <p>比較できていない部分と、次に確認すべきことの整理</p>
-      </div>
-    </div>
-
-    <div style="margin-top:20px; padding:18px; background:var(--white); border-radius:10px; box-shadow:0 2px 10px oklch(23% 0.02 60 / 6%);">
-      <p style="font-size:13px;">
-        <strong>無料相談でやらないこと</strong>もお伝えしておきます。
-        図面の細かい添削や、見積書の項目ごとの査定、正式な比較表の作成までは、無料相談の範囲には
-        含みません。まずは今の状況と悩みを整理する時間だと思ってください。
-      </p>
-    </div>
-
-    <p style="margin-top:18px; font-size:14px;">
-      そのうえで、「もっと詳しく確認してほしい」という方には、契約前まで一緒に確認していく
-      サポートもご用意しています。必要な方にだけ、相談の中でご案内します。
-    </p>
-
-    <div style="margin-top:26px;">
-      <a class="cta-btn" href="#">
-        無料相談に申し込む
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        無料相談してみる
       </a>
-      <div class="cta-note">※お申込み先URLは確定次第反映します</div>
     </div>
   </div>
 
-  <!-- 6. 権威性・実績 -->
-  <div class="pad">
-    <div class="num-mark">06</div>
-    <div class="eyebrow blue">WHO WE ARE</div>
-    <h2 class="section-title">誰が相談に乗るのか</h2>
+  <!-- 02: 3名の建築士 -->
+  <div class="pad" style="background:var(--green); color:var(--white); text-align:center;">
+    <div class="big-num" style="color:var(--gold);">02</div>
+    <h2 style="font-size:21px; margin-top:6px; color:var(--white);">
+      3名の建築士があなたの<br>家づくりに伴走
+    </h2>
 
-    <div class="bio-card">
-      <div style="display:flex; align-items:center; gap:14px;">
-        <div class="portrait-placeholder">
-          <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 4-6 8-6s8 2 8 6"/></svg>
-        </div>
-        <div>
-          <div style="font-family:'Shippori Mincho',serif; font-size:16px; color:var(--ink); font-weight:700;">前田浩貴(まえちゃん)</div>
-          <div style="font-size:11px; color:var(--ink-soft); margin-top:2px;">写真プレースホルダー(本人ポートレート)</div>
-        </div>
-      </div>
-
-      <p style="margin-top:18px; font-size:14px;">
-        1級建築士・1級建築施工管理技士の資格を持つ「まえちゃん」こと前田浩貴が中心となり、
-        インザホーム(愛知県高浜市)代表として、家事動線や収納など暮らしやすさを見る女性建築士2名を
-        含めた3名体制でサポートします。
-      </p>
-    </div>
-
-    <div class="stat-row" style="margin-top:18px;">
-      <div class="stat-card">
-        <div class="stat-num">30年</div>
-        <div class="stat-label">現場監督としての経験</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num">3名</div>
-        <div class="stat-label">建築士によるサポート体制</div>
+    <div style="margin-top:20px;">
+      <div class="photo-ph" style="border-color:var(--white); background:rgba(255,255,255,0.08); aspect-ratio:16/10;">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.4"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2 20c0-3.5 2.7-6 6-6s6 2.5 6 6"/><path d="M12 20c0-3.5 2.7-6 6-6"/></svg>
+        <div class="cap" style="color:rgba(255,255,255,0.85);">写真プレースホルダー<br>(建築士3名の紹介写真)</div>
       </div>
     </div>
 
-    <p style="margin-top:20px; font-size:14px;">
-      現場監督として30年、設計だけでなく実際の施工まで見てきました。「設計は現場を知らず、
-      現場は設計の意図を知らない」というのが、住宅業界でよく起きるすれ違いなんです。その両方を
-      知っているからこそ、図面の上だけでは分からない問題にも気づけます。
+    <p style="margin-top:20px; font-size:14px; color:rgba(255,255,255,0.92); text-align:left;">
+      まえちゃんが全体を判断し、2名の女性建築士が暮らしと技術の視点を重ねます。
+      必要な段階だけ選ぶことも、契約前までまとめて任せることもできます。
     </p>
 
-    <p style="margin-top:18px; font-size:14px;">
-      普段はYouTubeチャンネル「1級建築士 まえちゃんの家づくり教室」やInstagramで、
-      家づくりの基準や住宅会社に確認すべきことを発信しています。相談する前に、どんな人間か
-      見てから決めていただいて大丈夫です。
-    </p>
-
-    <div class="gallery-grid" style="margin-top:22px;">
-      <div class="img-placeholder square">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-        <div class="cap">写真プレースホルダー<br>(外観・施工事例)</div>
-      </div>
-      <div class="img-placeholder square">
-        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg>
-        <div class="cap">写真プレースホルダー<br>(外観・施工事例)</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 7. 相談で見ているポイント -->
-  <div class="pad section-bg-alt">
-    <div class="num-mark">07</div>
-    <div class="eyebrow">WHAT WE CHECK</div>
-    <h2 class="section-title">相談でよく見ているポイント</h2>
-
-    <p style="margin-top:16px; font-size:14px;">
-      無料相談でよく確認しているのは、たとえばこんな視点です。
-    </p>
-
-    <div style="margin-top:10px;">
-      <div class="point-row">
-        <div class="point-badge">01</div>
-        <p style="color:var(--ink);">2階の柱が1階の柱の真上にちゃんと乗っているか(構造の安定性)</p>
-      </div>
-      <div class="point-row">
-        <div class="point-badge">02</div>
-        <p style="color:var(--ink);">見積書の「一式」表記の中に、何が含まれていて何が含まれていないか</p>
-      </div>
-      <div class="point-row">
-        <div class="point-badge">03</div>
-        <p style="color:var(--ink);">南北の窓の配置が、明るさだけでなく夏冬の快適さにどう影響するか</p>
-      </div>
-      <div class="point-row">
-        <div class="point-badge">04</div>
-        <p style="color:var(--ink);">住みはじめてから直せない部分(構造・断熱・気密)と、後から直せる部分の見分け方</p>
-      </div>
+    <div style="margin-top:16px; padding:18px; background:rgba(255,255,255,0.1); border-radius:14px; text-align:left;">
+      <p style="font-size:14px; font-weight:700; color:var(--gold);">住宅会社を紹介して紹介料をもらう事はしていません</p>
+      <p style="margin-top:8px; font-size:13.5px; color:rgba(255,255,255,0.92);">家族が納得して選ぶための第三者でありたい</p>
     </div>
 
-    <p style="margin-top:18px; font-size:14px;">
-      図面や見積もりを見慣れていないと気づきにくいところを、建築士の目で一緒に確認します。
-    </p>
-  </div>
-
-  <!-- 8. FAQ -->
-  <div class="pad">
-    <div class="num-mark">08</div>
-    <div class="eyebrow blue">FAQ</div>
-    <h2 class="section-title">よくある質問</h2>
-
-    <div style="margin-top:16px; display:flex; flex-direction:column;">
-      <div class="faq-item cream">
-        <div class="faq-q"><span class="qa-mark q">Q</span><span>すでに住宅会社と契約していても相談できますか?</span></div>
-        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、相談自体は可能です。ただし契約前の方が確認・修正できる範囲は広いので、「契約前に一度整理したい」という段階でのご相談をおすすめしています。</p></div>
-      </div>
-      <div class="faq-item blue-tint">
-        <div class="faq-q"><span class="qa-mark q">Q</span><span>オンラインだけで完結しますか? 全国から相談できますか?</span></div>
-        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">はい、Zoomでの相談なので全国どこからでも申し込めます。</p></div>
-      </div>
-      <div class="faq-item cream">
-        <div class="faq-q"><span class="qa-mark q">Q</span><span>相談すると、必ず有料サポートを勧められますか?</span></div>
-        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">いいえ。無理な営業はしません。お話を伺って必要ないと判断すれば、正直にお伝えします。</p></div>
-      </div>
-      <div class="faq-item blue-tint">
-        <div class="faq-q"><span class="qa-mark q">Q</span><span>本当に無料ですか? 時間はどれくらいかかりますか?</span></div>
-        <div class="faq-a"><span class="qa-mark a">A</span><p style="font-size:13px;">無料相談は費用がかかりません。まずは今の状況と悩みを整理する時間としてお使いください。</p></div>
-      </div>
-    </div>
-  </div>
-
-  <!-- 9. 最終CTA(ダークバンド) -->
-  <div class="pad band-dark" style="text-align:center;">
-    <h2 style="font-size:23px; color:var(--white);">契約前に、一度立ち止まって<br>整理しませんか</h2>
-
-    <p style="margin-top:18px; font-size:14px; text-align:left;">
-      比較の仕方に迷ったまま契約を進めるより、今の状態を一度、第三者の建築士と一緒に
-      確認してみませんか。無理な営業は一切しません。まずは無料相談から。
-    </p>
-
-    <div style="margin-top:26px;">
-      <a class="cta-btn on-dark" href="#">
-        無料相談に申し込む
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    <div style="margin-top:20px;">
+      <a class="line-cta" style="background:var(--gold); color:var(--green-deep); box-shadow:0 8px 20px rgba(0,0,0,0.25);" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge" style="background:var(--green); color:var(--white);">LINE</span>
+        建築士に今すぐ相談する
       </a>
-      <div class="cta-note on-dark">※お申込み先URLは確定次第反映します</div>
     </div>
   </div>
 
-  <!-- 10. 法的表記・フッター -->
-  <div class="footer pad" style="text-align:left;">
-    <div style="font-family:'Shippori Mincho',serif; font-size:15px; color:var(--white); font-weight:700;">家づくりサポート</div>
-    <p style="margin-top:14px; font-size:12px;">運営: インザホーム(前田浩貴)/ 愛知県高浜市</p>
-    <div class="pending">住所・電話番号は確認中</div>
-    <p style="margin-top:14px; font-size:12px;">
-      <span style="text-decoration:underline; text-underline-offset:3px;">プライバシーポリシー</span>
+  <!-- サービス一覧の導入 -->
+  <div class="pad" style="text-align:center; padding-bottom:0;">
+    <p class="eyebrow">SUPPORT MENU</p>
+    <h2 style="font-size:19px; margin-top:8px; color:var(--green);">
+      必要な段階だけ選べる<br>7つのサポート
+    </h2>
+  </div>
+
+  <!-- 03 (service 01): 家づくりコンセプト設計 -->
+  <div class="pad">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">方向性を決める</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">家づくりコンセプト設計</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">01</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      家族それぞれの希望をマインドマップで聞き取り、予算・暮らし方・間取り・性能の優先順位を
+      整理します。迷いの原因を言葉にして、住宅会社を選ぶ基準が分かる状態をつくります。
     </p>
-    <div class="pending">掲載URLは確認中</div>
-    <div class="fine" style="margin-top:22px;">© インザホーム</div>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>ZOOMで約120分のヒアリング</p></div>
+      <div class="step"><span class="step-num">02</span><p>希望と優先順位をマインドマップ化</p></div>
+      <div class="step"><span class="step-num">03</span><p>判断基準を家づくりノートに整理</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      <strong>家づくりノートプレゼント</strong><br>
+      迷った時に戻れる基準ができ、会社ごとの提案に振り回されにくくなります
+    </div>
+
+    <p class="exclude-note">間取り図の作成は含みません</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        方向性を建築士と整理する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- 04 (service 02): 建築士3名の間取り添削 -->
+  <div class="pad" style="background:var(--white);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="4" y="4" width="16" height="16" rx="2"/><path d="M8 9h8M8 13h5"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">間取りを整える</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">建築士3名の間取り添削</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">02</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      住宅会社から受け取った間取り1案を、まえちゃんと女性建築士2名で確認します。
+      家事動線・収納・家具・採光・構造・冷暖房まで、住んでからの不便につながる点を具体的に見つけます。
+    </p>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>3名の建築士が1案を多角的に確認</p></div>
+      <div class="step"><span class="step-num">02</span><p>添削資料と住宅会社への質問を作成</p></div>
+      <div class="step"><span class="step-num">03</span><p>修正後の間取りを1回再確認</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      永く安心して暮らせて、使いやすさ・住みやすさを確認。<br>
+      指摘して終わりではなく、改善されたかまで見届けます。
+    </div>
+
+    <p class="exclude-note">新しい間取りを一から描くサービスではありません</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        間取りを建築士に相談する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- 05 (service 03): 見積もり見える化診断 -->
+  <div class="pad">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3Z"/><path d="M9 8h6M9 12h6"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">見積もりを比べる</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">見積もり見える化診断</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">03</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      住宅会社2社までの見積もりを同じ条件にそろえます。本体工事・別途工事・一式表記・不足工事・
+      追加費用を分解し、総額だけでは見えない違いを分かりやすく整理します。現役の建築士で
+      今でも家づくりをしているから市場価格が分かります。
+    </p>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>住宅会社2社までを同条件で比較</p></div>
+      <div class="step"><span class="step-num">02</span><p>不足工事と追加費用の可能性を確認</p></div>
+      <div class="step"><span class="step-num">03</span><p>比較表・質問一覧・ZOOM解説</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      金額差の理由が見えて、住宅会社へ何を確認すればよいか分かります。
+    </div>
+
+    <p class="exclude-note">3社目以降は追加対応としてご案内します</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        見積もりの悩みを相談する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- 06 (service 04): 性能・標準仕様比較診断 -->
+  <div class="pad" style="background:var(--white);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v6c0 4.5-3.4 7.5-8 8-4.6-.5-8-3.5-8-8V7l8-4Z"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">性能と仕様を比べる</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">性能・標準仕様比較診断</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">04</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      住宅会社2社までの断熱・気密・窓・換気・耐震・外装などを並べて確認します。数字の高さだけでは
+      なく、地域・予算・暮らし方に合う仕様かを建築士が判断します。
+    </p>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>性能と標準仕様を2社まで比較</p></div>
+      <div class="step"><span class="step-num">02</span><p>標準・オプション・施工条件を整理</p></div>
+      <div class="step"><span class="step-num">03</span><p>比較表と確認質問、会社選びの助言</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      数値の高さではなく、暮らしとのコスパで判断。<br>
+      地域、予算、暮らし方から比較表と質問一覧を元にアドバイスします。
+    </div>
+
+    <p class="exclude-note">3社目以降は追加対応としてご案内します</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        性能・仕様を比較相談する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- 07 (service 05): 契約前最終チェック -->
+  <div class="pad">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 12l2 2 4-4"/><rect x="4" y="4" width="16" height="16" rx="3"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">契約前に確認する</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">契約前最終チェック</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">05</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      契約直前の見積もり・間取り・仕様書・別途工事・変更ルール・支払い・工期・保証を確認します。
+      曖昧な点を質問に変えて、契約後の「聞いていない」を減らします。
+    </p>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>最終資料の不足と食い違いを確認</p></div>
+      <div class="step"><span class="step-num">02</span><p>契約前に聞くべき質問を整理</p></div>
+      <div class="step"><span class="step-num">03</span><p>ZOOMで確認結果を分かりやすく解説</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      確認できている事、できていない事を明確にして、納得した状態で契約する。
+    </div>
+
+    <p class="exclude-note">法律上の契約書審査、法的判断、紛争相談は含みません</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        契約前チェックを相談する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- 08 (service 06): ZOOM個別相談 -->
+  <div class="pad" style="background:var(--white);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow">必要な時に言葉で相談</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--green);">ZOOM個別相談</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">06</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px;">
+      家づくりの悩みを顔を見ながら言葉で整理する単発相談です。個別サポート後の補足、住宅会社から
+      回答が来た後、夫婦の考えがまとまらない時にも利用できます。
+    </p>
+
+    <div style="margin-top:12px;">
+      <div class="step"><span class="step-num">01</span><p>60分または120分から選択</p></div>
+      <div class="step"><span class="step-num">02</span><p>単発利用も個別サポート後の補足も可能</p></div>
+      <div class="step"><span class="step-num">03</span><p>悩みと次に確認することを整理</p></div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px; text-align:left;">
+      顔を見ながら相談して、悩みの正体を整理する。<br>
+      夫婦で考えがまとまらないときの相談でもOKです。
+    </div>
+
+    <p class="exclude-note">資料作成、図面作成、継続チャットは含みません</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        建築士に個別相談する
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-gold"></div>
+
+  <!-- 09 (service 07): 契約前トータルサポート -->
+  <div class="pad" style="background:var(--green); color:var(--white);">
+    <div style="display:flex; align-items:center; gap:14px;">
+      <div class="svc-icon" style="background:var(--gold); color:var(--green-deep);">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg>
+      </div>
+      <div>
+        <p class="eyebrow" style="color:var(--gold);">住宅会社決定まで伴走</p>
+        <h3 style="font-size:19px; margin-top:2px; color:var(--white);">契約前トータルサポート</h3>
+      </div>
+      <div class="big-num" style="margin-left:auto; font-size:34px;">07</div>
+    </div>
+
+    <p style="margin-top:16px; font-size:13.5px; color:rgba(255,255,255,0.92);">
+      方向性づくりから間取り、見積もり2社、性能・仕様2社、契約前確認までを90日間つなげて伴走します。
+      家づくり全体のバランスを見ながら住宅会社決定まで進めます。
+    </p>
+
+    <div style="margin-top:14px; padding:16px; background:rgba(255,255,255,0.08); border-radius:14px;">
+      <p style="font-size:13px; font-weight:900; color:var(--gold);">点ではなく、契約前までを1本につなぐ</p>
+      <div style="margin-top:10px; display:flex; flex-direction:column; gap:2px;">
+        <div class="step" style="padding:6px 0;"><span class="step-num" style="background:rgba(255,255,255,0.16); color:var(--gold);">01</span><p style="color:var(--white);">5つの個別サポートを一つにつなげる</p></div>
+        <div class="step" style="padding:6px 0;"><span class="step-num" style="background:rgba(255,255,255,0.16); color:var(--gold);">02</span><p style="color:var(--white);">ZOOM最大5回と期間中のチャット相談</p></div>
+        <div class="step" style="padding:6px 0;"><span class="step-num" style="background:rgba(255,255,255,0.16); color:var(--gold);">03</span><p style="color:var(--white);">判断の経緯を共有した3名が継続対応</p></div>
+      </div>
+    </div>
+
+    <div class="callout gold" style="margin-top:18px;">
+      家づくりの方向性から住宅会社決定・契約前確認まで<br><strong>90日間伴走します!</strong>
+    </div>
+
+    <p style="margin-top:14px; font-size:12px; color:rgba(255,255,255,0.65); text-align:center; font-weight:700;">サポート期間は90日です</p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" style="background:var(--gold); color:var(--green-deep); box-shadow:0 8px 20px rgba(0,0,0,0.25);" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge" style="background:var(--green); color:var(--white);">LINE</span>
+        トータルサポートを相談する
+      </a>
+    </div>
+  </div>
+
+  <!-- 相談からサポート開始までの流れ -->
+  <div class="pad">
+    <p class="eyebrow">FLOW</p>
+    <h2 style="font-size:20px; margin-top:6px; color:var(--green);">相談からサポート開始まで</h2>
+    <p style="margin-top:8px; font-size:13px; color:var(--gray);">分からないまま申し込む必要はありません</p>
+
+    <div style="margin-top:14px;">
+      <div class="flow-item">
+        <span class="flow-num">1</span>
+        <div><p style="font-weight:900; font-size:14px; color:var(--green);">LINEで無料相談</p><p style="margin-top:2px; font-size:13px;">今の悩みと資料の状況を確認</p></div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">2</span>
+        <div><p style="font-weight:900; font-size:14px; color:var(--green);">ZOOMで状況整理</p><p style="margin-top:2px; font-size:13px;">比較できていない点を明確に</p></div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">3</span>
+        <div><p style="font-weight:900; font-size:14px; color:var(--green);">必要な内容をご案内</p><p style="margin-top:2px; font-size:13px;">個別またはトータルを選択</p></div>
+      </div>
+      <div class="flow-item">
+        <span class="flow-num">4</span>
+        <div><p style="font-weight:900; font-size:14px; color:var(--green);">お申し込み後に開始</p><p style="margin-top:2px; font-size:13px;">資料共有と日程を調整</p></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:20px;">無理な営業はしません</div>
+    <p style="margin-top:12px; font-size:11.5px; color:var(--gray); text-align:center;">
+      状況や時期、資料の状態によってはお受けできない場合があります
+    </p>
+
+    <div style="margin-top:18px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        まずは無料相談してみる
+      </a>
+    </div>
+  </div>
+
+  <div class="rule-thin"></div>
+
+  <!-- FAQ -->
+  <div class="pad" style="background:var(--white);">
+    <p class="eyebrow">FAQ</p>
+    <h2 style="font-size:20px; margin-top:6px; color:var(--green);">よくある質問</h2>
+
+    <div style="margin-top:14px;">
+      <div class="faq-item">
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>どのサポートを選べばよいか分かりません</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p>無料相談で状況を確認し、必要な方にだけ今の段階に合う内容をご案内します</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>住宅会社を絞れていなくても相談できますか</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p>はい。迷っている点と先に確認すべきことから一緒に整理します</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>相談内容や家づくりの様子は掲載されますか</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p>掲載をお願いする場合は、事前に内容と範囲を説明して個別に同意をいただきます</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q"><span class="qa-mark q">Q</span><span>土地診断は含まれますか</span></div>
+        <div class="faq-a"><span class="qa-mark a">A</span><p>今回のサポートには含みません。土地の悩みは無料相談で状況をお聞かせください</p></div>
+      </div>
+    </div>
+
+    <p style="margin-top:18px; font-size:13px; font-weight:700; color:var(--green); text-align:center;">
+      疑問を残したまま申し込まないでください
+    </p>
+
+    <div style="margin-top:16px;">
+      <a class="line-cta" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge">LINE</span>
+        質問もLINEで相談する
+      </a>
+    </div>
+  </div>
+
+  <!-- 最終CTA -->
+  <div class="pad" style="background:var(--green); color:var(--white); text-align:center;">
+    <p class="eyebrow" style="color:var(--gold);">住宅会社を決める前に</p>
+    <h2 style="font-size:23px; margin-top:10px; color:var(--white);">
+      比較できていないことを<br>一度、整理しませんか
+    </h2>
+    <p style="margin-top:14px; font-size:13.5px; color:rgba(255,255,255,0.9);">
+      答えを押しつける相談ではなく、ご家族が納得して決めるための無料相談です。
+    </p>
+
+    <div style="margin-top:20px; padding:18px; background:rgba(255,255,255,0.1); border-radius:14px; text-align:left;">
+      <p style="font-size:13px; font-weight:900; color:var(--gold); margin-bottom:10px;">LINEで相談できること</p>
+      <div class="badge-row">
+        <span class="badge" style="background:rgba(255,255,255,0.12); color:var(--white); border-color:transparent;">今の悩みの整理</span>
+        <span class="badge" style="background:rgba(255,255,255,0.12); color:var(--white); border-color:transparent;">比較できていない点</span>
+        <span class="badge" style="background:rgba(255,255,255,0.12); color:var(--white); border-color:transparent;">必要な資料と質問</span>
+        <span class="badge" style="background:rgba(255,255,255,0.12); color:var(--white); border-color:transparent;">次に取る行動</span>
+      </div>
+    </div>
+
+    <div style="margin-top:22px;">
+      <a class="line-cta" style="background:var(--gold); color:var(--green-deep); box-shadow:0 8px 20px rgba(0,0,0,0.25);" href="https://s.lmes.jp/landing-qr/2009129570-l1jPYXax">
+        <span class="line-badge" style="background:var(--green); color:var(--white);">LINE</span>
+        無料相談を申し込む
+      </a>
+    </div>
+
+    <p style="margin-top:16px; font-size:12px; color:rgba(255,255,255,0.7);">1級建築士まえちゃん＋女性建築士2名</p>
+    <p style="margin-top:4px; font-size:12px; font-weight:700; color:var(--gold);">無理な営業はありません</p>
+  </div>
+
+  <!-- フッター -->
+  <div class="footer pad">
+    <p style="font-size:13px; font-weight:700;">まえちゃん｜家づくり丸ごとサポートする建築士</p>
+    <p style="margin-top:10px; font-size:11px;">運営: インザホーム(前田浩貴)/ 愛知県高浜市</p>
+    <p style="margin-top:14px; font-size:10.5px; opacity:0.6;">© インザホーム</p>
   </div>
 
 </div>
