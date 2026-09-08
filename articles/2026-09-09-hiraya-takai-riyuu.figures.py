@@ -41,29 +41,34 @@ def fig_heimen_hikaku():
 
 # ── 図2: 必要な土地面積の目安 ──────────────────────
 def fig_hitsuyou_tochi():
-    W, H = 880, 300
+    import math
+    W, H = 880, 360
     s = []
-    s.append(txt(0, 28, '平屋（延床30坪）を建てる場合に必要な土地面積の目安', 17, INK, '700'))
-    s.append(txt(0, 50, '※ 建ぺい率60%のエリアを想定した一般的な目安です。実際の数値は土地ごとに確認してください', 12, INK2))
+    s.append(txt(0, 28, '平屋（延床30坪）を建てる場合、必要な土地面積は段階的に変わります', 17, INK, '700'))
+    s.append(txt(0, 50, '※ 高浜市周辺（建ぺい率60%程度が多いエリア）を想定した目安です。実際の数値は土地ごとに確認してください', 12, INK2))
 
-    # 土地の外枠(50坪相当)と、建物の footprint(30坪相当)を入れ子で表示
-    land_x, land_y, land_w, land_h = 240, 80, 400, 180
-    s.append(box(land_x, land_y, land_w, land_h, TINT, LINE, 1.5, 8))
-    s.append(txt(land_x + land_w / 2, land_y - 14, '土地：約50坪', 14, INK, '700', 'middle'))
+    base_y = 240  # 各箱の底辺をそろえる
+    k = 13.5      # 面積の平方根に対する縮尺(px)
+    cols = [
+        (150, 50,  MUTE,  '単純計算では',      '建ぺい率60%だけで割った数値'),
+        (440, 70,  BLUE,  '現場の実感では',     '敷地形状・道路条件を踏まえると'),
+        (730, 100, NAVY,  '実際に選ばれるのは', '高浜市周辺での実例'),
+    ]
+    for cx, tsubo, color, lead, note in cols:
+        side = k * math.sqrt(tsubo)
+        x = cx - side / 2
+        y = base_y - side
+        s.append(box(x, y, side, side, color, color, 0, 6))
+        s.append(txt(cx, base_y + 26, lead, 13, INK2, '700', 'middle'))
+        s.append(txt(cx, base_y + 48, f'約{tsubo}坪', 20, color if color != MUTE else INK, '700', 'middle'))
+        s.append(txt(cx, base_y + 68, note, 11, INK2, '400', 'middle'))
 
-    # 建ぺい率60%相当の建築面積を内側に(面積比60%になるよう縦横約77%ずつ)
-    bld_w, bld_h = land_w * 0.77, land_h * 0.77
-    bld_x = land_x + (land_w - bld_w) / 2
-    bld_y = land_y + (land_h - bld_h) / 2
-    s.append(box(bld_x, bld_y, bld_w, bld_h, '#fdf2f2', CRIT, 1.5, 6))
-    s.append(txt(bld_x + bld_w / 2, bld_y + bld_h / 2 - 4, '建物：延床30坪', 14, CRIT_D, '700', 'middle'))
-    s.append(txt(bld_x + bld_w / 2, bld_y + bld_h / 2 + 18, '（建築面積30坪）', 12, CRIT_D, '600', 'middle'))
-
-    s.append(txt(land_x + land_w / 2, land_y + land_h + 30,
-                  '外側の余白が、駐車場・庭・隣地との距離になります', 13, INK2, '600', 'middle'))
+    # 進行を示す矢印
+    s.append(arrow(255, 100, INK2, 130))
+    s.append(arrow(545, 100, INK2, 130))
     return wrap(''.join(s), W, H,
-                '平屋に必要な土地面積の目安',
-                '建ぺい率60%のエリアで延床30坪の平屋を建てる場合土地は約50坪が目安。建物の周囲の余白が駐車場や庭隣地との距離になる。実際の数値は土地ごとに確認が必要。')
+                '平屋に必要な土地面積は段階的に変わる図',
+                '建ぺい率60%だけの単純計算では延床30坪の平屋に約50坪の土地で足りる計算になるが、敷地形状や道路条件を踏まえた現場の実感では約70坪が必要になるケースが多い。実際に高浜市周辺で平屋が選ばれる土地は約100坪前後と、比較的余裕のある広さが多い。')
 
 
 # ── 図3: 建物の形とコストの関係 ──────────────────────
