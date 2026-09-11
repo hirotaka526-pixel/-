@@ -29,6 +29,14 @@ TINT   = '#f4f7fb'
 STD_W = 880
 MIN_W = 660
 
+# カードの標準角丸・影(box()のr=8はレガシー互換用に残す。新規の図はcard()を使う)
+RADIUS = 14
+_SHADOW_DEFS = (
+    '<filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">'
+    '<feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0d366b" flood-opacity="0.12"/>'
+    '</filter>'
+)
+
 
 def wrap(inner, w, h, title, desc):
     """SVG本体を組み立てる。title/descはスクリーンリーダー用なので必ず書く。"""
@@ -39,6 +47,7 @@ def wrap(inner, w, h, title, desc):
         f'role="img" aria-labelledby="{tid} {did}" '
         f'style="width:100%;min-width:{MIN_W}px;height:auto;display:block;font-family:{FONT}">'
         f'<title id="{tid}">{title}</title><desc id="{did}">{desc}</desc>'
+        f'<defs>{_SHADOW_DEFS}</defs>'
         f'<rect width="{w}" height="{h}" fill="{SURF}"/>{inner}</svg>'
     )
 
@@ -84,3 +93,43 @@ def pill(x, y, w, label, fill, stroke, tcol, size=13):
 def chip(x, y, w, h, label, fill, tcol=SURF, size=15):
     return box(x, y, w, h, fill, fill, 1.5) + \
            txt(x + w / 2, y + h / 2 + 6, label, size, tcol, '700', 'middle')
+
+
+def card(x, y, w, h, fill=SURF, accent=None, r=RADIUS, shadow=True):
+    """box()の上位版。角丸を大きくし、柔らかい影を付ける。
+
+    accentを指定すると、カード上端に4px幅のアクセントバーが入る
+    (色分けを「全面塗り」ではなく「アクセント1本」で示すので、白背景+濃い文字が保て、
+    ボックスが重く見えない)。囲み線は入れない(影で輪郭が付くため)。
+    """
+    f = ' filter="url(#cardShadow)"' if shadow else ''
+    s = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}"{f}/>'
+    if accent:
+        # 上端だけ角丸に沿わせた帯(rectをクリップして重ねる簡易実装)
+        s += (f'<clipPath id="ac{abs(hash((x,y,w,h))) % 99999}">'
+              f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}"/></clipPath>'
+              f'<rect x="{x}" y="{y}" width="{w}" height="6" fill="{accent}" '
+              f'clip-path="url(#ac{abs(hash((x,y,w,h))) % 99999})"/>')
+    return s
+
+
+def badge(cx, cy, r, label, fill=BLUE, tcol=SURF, size=18):
+    """円形バッジ。番号(①②③やSTEP数字)をテキストより目立たせたいときに使う。"""
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{fill}"/>'
+            f'{txt(cx, cy + size * 0.36, label, size, tcol, "700", "middle")}')
+
+
+def check_badge(cx, cy, r=11, color=GOOD):
+    """check()の円形バッジ版。小さい線だけより視認性が高い。"""
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{color}"/>'
+            f'<path d="M{cx - r*0.45} {cy} l{r*0.35} {r*0.35} l{r*0.6}-{r*0.7}" '
+            f'fill="none" stroke="{SURF}" stroke-width="2.2" '
+            f'stroke-linecap="round" stroke-linejoin="round"/>')
+
+
+def cross_badge(cx, cy, r=11, color=CRIT):
+    """cross()の円形バッジ版。"""
+    d = r * 0.4
+    return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{color}"/>'
+            f'<path d="M{cx-d} {cy-d} l{2*d} {2*d} M{cx+d} {cy-d} l-{2*d} {2*d}" '
+            f'stroke="{SURF}" stroke-width="2.2" stroke-linecap="round"/>')
