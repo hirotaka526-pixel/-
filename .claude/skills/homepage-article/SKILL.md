@@ -195,12 +195,14 @@ python3 $S/export_png.py articles/<slug>.figures.py articles/figures/
 - **Instagram（会社アカウント）**: @in.the.home https://www.instagram.com/in.the.home/
 - **Instagram（個人アカウント）**: まえちゃん｜家づくりを丸ごとサポートする建築士
   https://www.instagram.com/maechan.no.iezukuri/
+- **note（個人アカウント）**: まえちゃん｜家づくりを丸ごとサポートする建築士
+  https://note.com/inthehome_maeda (2026年9月追加)
 
 置き方:
 
 - **記事の中盤**(本文が一番盛り上がったあたり)に1か所。「この話はYouTubeでも詳しく解説しています」
   のように、**そのテーマに関係する動画へ誘導する**。関係ない動画に飛ばさない
-- **記事の最後**にもう1か所。プロフィールボックスの下に、YouTube・Instagram(会社)・Instagram(個人)の3つを並べる
+- **記事の最後**にもう1か所。プロフィールボックスの下に、YouTube・Instagram(会社)・Instagram(個人)・noteの4つを並べる
 - 動画のタイトルやURLが分からない場合は、`[該当動画のURLを入れてください]` とプレースホルダーを置き、
   チャット側で「ここに入れる動画を選んでください」と伝える。**存在しない動画タイトルを書かない**
 

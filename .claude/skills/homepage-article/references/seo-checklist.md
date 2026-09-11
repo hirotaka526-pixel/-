@@ -261,15 +261,22 @@ YouTube「1級建築士 まえちゃんの家づくり教室」で家づくり�
 動画が特定できない場合は `[該当動画のURLを入れてください]` とプレースホルダーにして、
 チャットで「ここに入れる動画を選んでください」と伝える。**存在しない動画タイトルを書かない。**
 
-最後(プロフィールボックスの下):
+最後(プロフィールボックスの下。2026年9月更新、noteを追加):
 
 ```
-家づくりの本音や現場の様子は、YouTube・Instagramでも毎週発信しています。
+家づくりの本音や現場の様子は、YouTube・Instagram・noteでも発信しています。
 
 ▶ YouTube「1級建築士 まえちゃんの家づくり教室」
-　 https://www.youtube.com/@inthehome
-▶ Instagram @in.the.home
-　 https://www.instagram.com/in.the.home/
+　https://www.youtube.com/@inthehome
+
+▶ Instagram @in.the.home（会社アカウント）
+　https://www.instagram.com/in.the.home/
+
+▶ Instagram まえちゃん｜家づくりを丸ごとサポートする建築士（個人アカウント）
+　https://www.instagram.com/maechan.no.iezukuri/
+
+▶ note まえちゃん｜家づくりを丸ごとサポートする建築士
+　https://note.com/inthehome_maeda
 ```
 
 ---
