@@ -154,37 +154,5 @@ def cross_badge(cx, cy, r=11, color=CRIT):
             f'stroke="{SURF}" stroke-width="2.2" stroke-linecap="round"/>')
 
 
-def house_icon(cx, base_y, scale=1.0, wall=SURF, roof=TAN, line=INK2, door=None):
-    """シンプルな平屋アイコン(三角屋根+壁+ドア)。図解に「イラストらしさ」を足すための
-    装飾要素。**すべての図に使う必要はない**。写真の代わりにはならないので、
-    実際の施工写真を見せたい場面では<!-- photo: ... -->を使うこと。
-
-    cx: アイコン中心のx座標 / base_y: アイコンの設置面(地面)のy座標
-    """
-    s = scale
-    w, h = 64 * s, 46 * s        # 壁の幅・高さ
-    roof_h = 30 * s
-    x0 = cx - w / 2
-    y_wall_top = base_y - h
-    y_roof_top = y_wall_top - roof_h
-    door = door or roof
-    parts = []
-    # 壁
-    parts.append(f'<rect x="{x0}" y="{y_wall_top}" width="{w}" height="{h}" fill="{wall}" '
-                 f'stroke="{line}" stroke-width="{1.5*s}"/>')
-    # 屋根(三角、少し壁からはみ出させて庇っぽく)
-    eave = 6 * s
-    parts.append(f'<path d="M{x0-eave} {y_wall_top} L{cx} {y_roof_top} L{x0+w+eave} {y_wall_top} Z" '
-                 f'fill="{roof}" stroke="{line}" stroke-width="{1.5*s}" stroke-linejoin="round"/>')
-    # ドア
-    dw, dh = 14 * s, 22 * s
-    parts.append(f'<rect x="{cx - dw/2}" y="{base_y - dh}" width="{dw}" height="{dh}" '
-                 f'rx="{1.5*s}" fill="{door}"/>')
-    # 窓(左右に1つずつ)
-    win = 12 * s
-    for side in (-1, 1):
-        wx = cx + side * (w * 0.28) - win / 2
-        parts.append(f'<rect x="{wx}" y="{y_wall_top + h*0.22}" width="{win}" height="{win}" '
-                     f'rx="{1.5*s}" fill="{TINT if wall != TINT else SURF}" '
-                     f'stroke="{line}" stroke-width="{1.2*s}"/>')
-    return ''.join(parts)
+# house_icon()は2026年9月に試作したが、まえちゃんのイメージと合わず不採用。
+# イラスト要素は使わない方針。図解はテキスト・図形・数値の可視化に徹すること。
