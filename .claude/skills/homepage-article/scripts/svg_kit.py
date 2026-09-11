@@ -2,28 +2,37 @@
 """記事に埋め込む図解SVGを書くための共通部品。
 
 記事ごとの図解ファイル(articles/<slug>.figures.py)から import して使う。
-色は dataviz スキルの検証済みパレットに合わせてある。勝手に増やさないこと。
+色はインザホームのブランドイメージ(アースカラー基調+淡いグリーン、2026年9月改訂)に
+合わせてある。WCAGコントラスト比を確認済み。勝手に増やさないこと。
+
+変数名(NAVY/BLUE/BLUE_L/BLUE_M)は旧パレット(青系)からの互換のため残しているが、
+値はアース・グリーン系に変更済み。過去の記事のfigures.pyはコード変更なしで
+新パレットに切り替わる(再度 export_png.py を実行すれば新しい配色でPNGが出力される)。
 """
 
 FONT = '"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif'
 
-# ── パレット(dataviz reference palette) ──────────────────
-NAVY   = '#0d366b'   # blue 700   見出し・強調
-BLUE   = '#2a78d6'   # blue 450   中立情報
-BLUE_L = '#86b6ef'   # blue 250   ordinalの最淡ステップ(これより淡くしない)
-BLUE_M = '#184f95'   # blue 600
-GOOD   = '#0ca30c'   # status good
-GOOD_D = '#0a5c2e'   # good の濃い文字色
-CRIT   = '#d03b3b'   # status critical
-CRIT_D = '#8f2b2b'
-WARN   = '#fab219'   # status warning
-WARN_D = '#6b4d00'
-INK    = '#1a1a19'
-INK2   = '#52514e'
-MUTE   = '#8a8a86'
-LINE   = '#d8d8d4'
-SURF   = '#ffffff'
-TINT   = '#f4f7fb'
+# ── パレット(アースカラー基調+淡いグリーン。2026年9月、まえちゃんの指定) ──
+# 「NAVY/BLUE」等の変数名は互換のため維持。中身はグリーン系のブランドカラー
+NAVY   = '#3d5c34'   # 旧NAVY相当 → ブランドの濃いグリーン(見出し・強調・バッジの地色)
+BLUE   = '#6f9c5f'   # 旧BLUE相当 → ブランドの中間グリーン(中立情報・アクセントバー)
+BLUE_L = '#cfe0bd'   # 旧BLUE_L相当 → 淡いグリーン(塗り面・薄いフィル用。「淡い感じ」の主役)
+BLUE_M = '#517a44'   # 旧BLUE_M相当 → やや濃いグリーン(BLUEより強調したい時)
+GREEN_D, GREEN, GREEN_L, GREEN_M = NAVY, BLUE, BLUE_L, BLUE_M  # 分かりやすい別名(新規コードではこちらを推奨)
+TAN    = '#b98a55'   # アースカラーの木目・土色アクセント(屋根・木材などのイラストに)
+TAN_D  = '#7c5c34'   # TANの濃色(文字用)
+GOOD   = '#4d7a3f'   # status good(ブランドグリーンと同系統でまとめる)
+GOOD_D = '#2e4a26'   # good の濃い文字色
+CRIT   = '#b3402c'   # status critical(赤ではなくテラコッタ寄りの暖色でアースカラーに馴染ませる)
+CRIT_D = '#7a2a1c'
+WARN   = '#b8811f'   # status warning(マスタード系)
+WARN_D = '#6b4a10'
+INK    = '#332e26'   # 本文の黒に相当。純黒ではなく温かみのある焦げ茶黒
+INK2   = '#5c5748'
+MUTE   = '#8f8874'
+LINE   = '#ddd7c4'   # 境界線。暖色寄りのグレー
+SURF   = '#fbf9f4'   # 背景。純白ではなくアイボリー寄り
+TINT   = '#eef1e4'   # 薄い塗り面。淡いグリーン寄りのクリーム
 
 # 図の標準幅。880で描き、モバイルでは横スクロールさせる(min-width 660px)
 STD_W = 880
@@ -33,7 +42,7 @@ MIN_W = 660
 RADIUS = 14
 _SHADOW_DEFS = (
     '<filter id="cardShadow" x="-20%" y="-20%" width="140%" height="140%">'
-    '<feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#0d366b" flood-opacity="0.12"/>'
+    f'<feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="{NAVY}" flood-opacity="0.14"/>'
     '</filter>'
 )
 
@@ -52,9 +61,19 @@ def wrap(inner, w, h, title, desc):
     )
 
 
-def txt(x, y, s, size=16, fill=INK, weight='400', anchor='start'):
+def txt(x, y, s, size=16, fill=INK, weight='400', anchor='start', spacing=None):
+    sp = f' letter-spacing="{spacing}"' if spacing else ''
     return (f'<text x="{x}" y="{y}" font-size="{size}" fill="{fill}" '
-            f'font-weight="{weight}" text-anchor="{anchor}">{s}</text>')
+            f'font-weight="{weight}" text-anchor="{anchor}"{sp}>{s}</text>')
+
+
+def heading(x, y, s, size=18, fill=INK, accent=NAVY):
+    """図解タイトル用の見出し。左に小さいアクセントの角丸バーを添えて、
+    ただの黒文字よりデザイン性を出す。本文中のtxt()と役割を分けるために用意。
+    """
+    return (f'<rect x="{x}" y="{y - size * 0.78}" width="5" height="{size * 0.95}" '
+            f'rx="2.5" fill="{accent}"/>'
+            f'{txt(x + 14, y, s, size, fill, "700")}')
 
 
 def box(x, y, w, h, fill=SURF, stroke=LINE, sw=1.5, r=8):
@@ -133,3 +152,39 @@ def cross_badge(cx, cy, r=11, color=CRIT):
     return (f'<circle cx="{cx}" cy="{cy}" r="{r}" fill="{color}"/>'
             f'<path d="M{cx-d} {cy-d} l{2*d} {2*d} M{cx+d} {cy-d} l-{2*d} {2*d}" '
             f'stroke="{SURF}" stroke-width="2.2" stroke-linecap="round"/>')
+
+
+def house_icon(cx, base_y, scale=1.0, wall=SURF, roof=TAN, line=INK2, door=None):
+    """シンプルな平屋アイコン(三角屋根+壁+ドア)。図解に「イラストらしさ」を足すための
+    装飾要素。**すべての図に使う必要はない**。写真の代わりにはならないので、
+    実際の施工写真を見せたい場面では<!-- photo: ... -->を使うこと。
+
+    cx: アイコン中心のx座標 / base_y: アイコンの設置面(地面)のy座標
+    """
+    s = scale
+    w, h = 64 * s, 46 * s        # 壁の幅・高さ
+    roof_h = 30 * s
+    x0 = cx - w / 2
+    y_wall_top = base_y - h
+    y_roof_top = y_wall_top - roof_h
+    door = door or roof
+    parts = []
+    # 壁
+    parts.append(f'<rect x="{x0}" y="{y_wall_top}" width="{w}" height="{h}" fill="{wall}" '
+                 f'stroke="{line}" stroke-width="{1.5*s}"/>')
+    # 屋根(三角、少し壁からはみ出させて庇っぽく)
+    eave = 6 * s
+    parts.append(f'<path d="M{x0-eave} {y_wall_top} L{cx} {y_roof_top} L{x0+w+eave} {y_wall_top} Z" '
+                 f'fill="{roof}" stroke="{line}" stroke-width="{1.5*s}" stroke-linejoin="round"/>')
+    # ドア
+    dw, dh = 14 * s, 22 * s
+    parts.append(f'<rect x="{cx - dw/2}" y="{base_y - dh}" width="{dw}" height="{dh}" '
+                 f'rx="{1.5*s}" fill="{door}"/>')
+    # 窓(左右に1つずつ)
+    win = 12 * s
+    for side in (-1, 1):
+        wx = cx + side * (w * 0.28) - win / 2
+        parts.append(f'<rect x="{wx}" y="{y_wall_top + h*0.22}" width="{win}" height="{win}" '
+                     f'rx="{1.5*s}" fill="{TINT if wall != TINT else SURF}" '
+                     f'stroke="{line}" stroke-width="{1.2*s}"/>')
+    return ''.join(parts)
