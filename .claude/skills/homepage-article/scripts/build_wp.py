@@ -178,7 +178,7 @@ def author_box():
         f'<p style="margin:0 0 1em;font-size:14px;font-weight:700;color:#fff;background:{BRAND};'
         f'display:inline-block;padding:5px 14px;border-radius:4px">この記事を書いた人</p>'
         f'<p style="margin:0 0 .3em;font-size:20px;font-weight:700;color:{BRAND}">'
-        f'前田 浩貴（まえだ ひろき）</p>'
+        f'前田 浩貴（まえだ ひろたか）</p>'
         f'<p style="margin:0 0 1em;font-size:15px;color:{INK2}">'
         f'有限会社 IN THE HOME 代表／1級建築士・1級建築施工管理技士・2級土木施工管理技士</p>'
         f'<p style="{BODY}margin:0 0 1em">愛知県高浜市で注文住宅の設計・施工を手がける。'
