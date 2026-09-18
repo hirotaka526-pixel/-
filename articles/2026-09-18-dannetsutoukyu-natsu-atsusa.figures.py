@@ -69,29 +69,34 @@ def fig_hisashi_kouka():
 
 # ── 図3: 断熱等級の基準(2026年時点) ──────────────────────
 def fig_toukyu_kijun():
-    W, H = 880, 300
+    W, H = 880, 320
     s = []
     s.append(heading(0, 34, '断熱等級の基準(2026年時点)', 18))
 
     rows = [
-        ('等級4', 'UA値 0.87以下', '2025年4月以降の法的な最低基準', MUTE),
-        ('等級5', 'UA値 0.60以下', 'ZEH基準', BLUE_L),
-        ('等級6', 'UA値 0.46以下', 'HEAT20 G2グレード相当', BLUE),
-        ('等級7', 'UA値 0.26以下', 'HEAT20 G3グレード相当', NAVY),
+        ('等級4', 'UA値 0.87以下', '2025年4月以降の法的な最低基準', MUTE, None),
+        ('等級5', 'UA値 0.60以下', 'ZEH基準', BLUE_L, None),
+        ('等級6', 'UA値 0.46以下', 'HEAT20 G2グレード相当', NAVY, '弊社の標準仕様'),
+        ('等級7', 'UA値 0.26以下', 'HEAT20 G3グレード相当', BLUE, None),
     ]
     y0 = 62
     row_h = 50
-    for i, (grade, ua, note, color) in enumerate(rows):
+    for i, (grade, ua, note, color, tag) in enumerate(rows):
         y = y0 + i * row_h
         tcol = SURF if color in (BLUE, NAVY) else INK
         s.append(box(20, y, 840, row_h - 10, color, color, 0, 6))
         s.append(txt(45, y + 26, grade, 16, tcol, '700'))
         s.append(txt(150, y + 26, ua, 15, tcol, '700'))
         s.append(txt(400, y + 26, note, 14, tcol, '400'))
+    # 「弊社の標準仕様」タグを等級6の行に重ねて表示
+    tag_row_y = y0 + 2 * row_h
+    s.append(box(700, tag_row_y + 4, 150, row_h - 18, SURF, SURF, 0, 12))
+    s.append(txt(775, tag_row_y + (row_h - 10) / 2 + 5, '弊社の標準仕様', 13, NAVY, '700', 'middle'))
+
     s.append(txt(0, y0 + 4 * row_h + 20, '※ 2030年には等級5が新たな最低基準になる予定です', 14, INK2, '700'))
     return wrap(''.join(s), W, H,
                 '断熱等級の基準一覧(2026年時点)',
-                '等級4はUA値0.87以下で2025年4月以降の法的な最低基準、等級5はUA値0.60以下でZEH基準、等級6はUA値0.46以下でHEAT20のG2グレード相当、等級7はUA値0.26以下でHEAT20のG3グレード相当。2030年には等級5が新たな最低基準になる予定。')
+                '等級4はUA値0.87以下で2025年4月以降の法的な最低基準、等級5はUA値0.60以下でZEH基準、等級6はUA値0.46以下でHEAT20のG2グレード相当で弊社の標準仕様、等級7はUA値0.26以下でHEAT20のG3グレード相当。2030年には等級5が新たな最低基準になる予定。')
 
 
 FIGURES = {
