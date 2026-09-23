@@ -2,37 +2,45 @@
 """記事に埋め込む図解SVGを書くための共通部品。
 
 記事ごとの図解ファイル(articles/<slug>.figures.py)から import して使う。
-色はインザホームのブランドイメージ(アースカラー基調+淡いグリーン、2026年9月改訂)に
-合わせてある。WCAGコントラスト比を確認済み。勝手に増やさないこと。
+色はインザホームのブランドイメージ(ネイビー基調+ゴールドアクセント+複数色、
+2026年9月改訂)に合わせてある。WCAGコントラスト比を確認済み。勝手に増やさないこと。
 
-変数名(NAVY/BLUE/BLUE_L/BLUE_M)は旧パレット(青系)からの互換のため残しているが、
-値はアース・グリーン系に変更済み。過去の記事のfigures.pyはコード変更なしで
-新パレットに切り替わる(再度 export_png.py を実行すれば新しい配色でPNGが出力される)。
+変数名(NAVY/BLUE/BLUE_L/BLUE_M)は旧パレット(青系→アースグリーン系)からの互換のため
+残しているが、値はネイビー・ゴールド系に変更済み。過去の記事のfigures.pyはコード変更
+なしで新パレットに切り替わる(再度 export_png.py を実行すれば新しい配色でPNGが出力される)。
 """
 
 FONT = '"Hiragino Kaku Gothic ProN","Hiragino Sans","Yu Gothic","Meiryo",sans-serif'
 
-# ── パレット(アースカラー基調+淡いグリーン。2026年9月、まえちゃんの指定) ──
-# 「NAVY/BLUE」等の変数名は互換のため維持。中身はグリーン系のブランドカラー
-NAVY   = '#3d5c34'   # 旧NAVY相当 → ブランドの濃いグリーン(見出し・強調・バッジの地色)
-BLUE   = '#6f9c5f'   # 旧BLUE相当 → ブランドの中間グリーン(中立情報・アクセントバー)
-BLUE_L = '#cfe0bd'   # 旧BLUE_L相当 → 淡いグリーン(塗り面・薄いフィル用。「淡い感じ」の主役)
-BLUE_M = '#517a44'   # 旧BLUE_M相当 → やや濃いグリーン(BLUEより強調したい時)
-GREEN_D, GREEN, GREEN_L, GREEN_M = NAVY, BLUE, BLUE_L, BLUE_M  # 分かりやすい別名(新規コードではこちらを推奨)
-TAN    = '#b98a55'   # アースカラーの木目・土色アクセント(屋根・木材などのイラストに)
-TAN_D  = '#7c5c34'   # TANの濃色(文字用)
-GOOD   = '#4d7a3f'   # status good(ブランドグリーンと同系統でまとめる)
-GOOD_D = '#2e4a26'   # good の濃い文字色
-CRIT   = '#b3402c'   # status critical(赤ではなくテラコッタ寄りの暖色でアースカラーに馴染ませる)
-CRIT_D = '#7a2a1c'
-WARN   = '#b8811f'   # status warning(マスタード系)
-WARN_D = '#6b4a10'
-INK    = '#332e26'   # 本文の黒に相当。純黒ではなく温かみのある焦げ茶黒
-INK2   = '#5c5748'
-MUTE   = '#8f8874'
-LINE   = '#ddd7c4'   # 境界線。暖色寄りのグレー
-SURF   = '#fbf9f4'   # 背景。純白ではなくアイボリー寄り
-TINT   = '#eef1e4'   # 薄い塗り面。淡いグリーン寄りのクリーム
+# ── パレット(ネイビー基調+ゴールドアクセント+複数色。2026年9月、まえちゃんの指定) ──
+# 「NAVY/BLUE/BLUE_L/BLUE_M」等の変数名は互換のため維持。中身はネイビー・ゴールド系
+NAVY   = '#1b3a5c'   # ブランドの濃いネイビー(見出し・強調・バッジの地色。主色)
+BLUE   = '#2f6b52'   # 3色比較の2色目(深緑寄り。旧「BLUE」を差し替え)
+BLUE_L = '#e2e8ee'   # 淡いネイビー系のフィル用(「淡い感じ」の背景・薄い塗り面)
+BLUE_M = '#1f6d77'   # 3色比較の3色目(ティール。BLUEより寒色寄りで差別化)
+GREEN_D, GREEN, GREEN_L, GREEN_M = NAVY, BLUE, BLUE_L, BLUE_M  # 分かりやすい別名(互換維持用)
+NAVY_L = '#e2e8ee'   # NAVYの淡色(アイコン地・薄いフィル)
+FOREST   = BLUE       # 新規コードではこちらの名前を推奨(3色比較の2色目=深緑)
+FOREST_L = '#e1ebe5'  # FORESTの淡色
+TEAL     = BLUE_M     # 新規コードではこちらの名前を推奨(3色比較の3色目)
+TEAL_L   = '#e0edee'  # TEALの淡色
+MULTI  = [NAVY, FOREST, TEAL]  # 3項目を色分けするときはこの順で使う
+GOLD   = '#c99a2e'   # アクセントカラー(タイトル下のバー、強調に使う暖色)
+GOLD_D = '#8a6a1a'
+TAN    = GOLD         # 互換用(木目・土色アクセントとして使っていた箇所はGOLDに統一)
+TAN_D  = GOLD_D
+GOOD   = '#3f9142'   # status good(明快なグリーン)
+GOOD_D = '#256b2c'
+CRIT   = '#c0392b'   # status critical(はっきりした赤)
+CRIT_D = '#8a2f22'
+WARN   = '#b8862a'   # status warning(アンバー系。GOLDより少し濃い)
+WARN_D = '#7a5a17'
+INK    = '#22303f'   # 本文の黒に相当。ネイビー寄りの濃いグレー
+INK2   = '#5b6673'
+MUTE   = '#8b93a0'
+LINE   = '#dde3ea'   # 境界線。寒色寄りの淡いグレー
+SURF   = '#ffffff'   # 背景。純白
+TINT   = '#eef2f6'   # 薄い塗り面。淡いネイビー寄りのグレー
 
 # 図の標準幅。880で描き、モバイルでは横スクロールさせる(min-width 660px)
 STD_W = 880
@@ -67,9 +75,10 @@ def txt(x, y, s, size=16, fill=INK, weight='400', anchor='start', spacing=None):
             f'font-weight="{weight}" text-anchor="{anchor}"{sp}>{s}</text>')
 
 
-def heading(x, y, s, size=18, fill=INK, accent=NAVY):
+def heading(x, y, s, size=18, fill=NAVY, accent=GOLD):
     """図解タイトル用の見出し。左に小さいアクセントの角丸バーを添えて、
     ただの黒文字よりデザイン性を出す。本文中のtxt()と役割を分けるために用意。
+    文字色はNAVY、アクセントバーはGOLDが標準(2026年9月改訂)。
     """
     return (f'<rect x="{x}" y="{y - size * 0.78}" width="5" height="{size * 0.95}" '
             f'rx="2.5" fill="{accent}"/>'
@@ -155,4 +164,54 @@ def cross_badge(cx, cy, r=11, color=CRIT):
 
 
 # house_icon()は2026年9月に試作したが、まえちゃんのイメージと合わず不採用。
-# イラスト要素は使わない方針。図解はテキスト・図形・数値の可視化に徹すること。
+# ただし2026年9月の参考画像で「建物・地図ピンなどの簡素な線画アイコン」は
+# 使ってよいと確認が取れたため、以下の line-icon 系は使用可(家の絵を描くのとは別物、
+# 情報を示す記号としてのアイコンに徹すること。装飾的なイラストにはしない)。
+
+
+def building_icon(cx, cy, size=22, color=NAVY):
+    """簡易な建物(市役所・役場)の線画アイコン。(cx,cy)を中心に描く。"""
+    w, h = size, size * 0.88
+    x0, y0 = cx - w / 2, cy - h / 2
+    roof_h = h * 0.3
+    body_y = y0 + roof_h
+    body_h = h - roof_h
+    sw = max(1.6, size * 0.09)
+    s = [
+        f'<path d="M{x0 - 2} {body_y} L{cx} {y0} L{x0 + w + 2} {body_y}" '
+        f'fill="none" stroke="{color}" stroke-width="{sw}" '
+        f'stroke-linecap="round" stroke-linejoin="round"/>',
+        f'<rect x="{x0}" y="{body_y}" width="{w}" height="{body_h}" '
+        f'fill="none" stroke="{color}" stroke-width="{sw}" rx="{size*0.06}"/>',
+    ]
+    for i in range(3):
+        lx = x0 + w * 0.22 + i * (w * 0.28)
+        s.append(f'<line x1="{lx}" y1="{body_y + body_h*0.2}" x2="{lx}" y2="{body_y + body_h*0.82}" '
+                  f'stroke="{color}" stroke-width="{sw*0.75}" stroke-linecap="round"/>')
+    return ''.join(s)
+
+
+def pin_icon(cx, cy, size=22, color=NAVY):
+    """簡易な地図ピンの線画アイコン。(cx,cy)を中心(ピン全体の中心)に描く。"""
+    r = size * 0.32
+    top = cy - size * 0.42
+    sw = max(1.6, size * 0.09)
+    return (
+        f'<path d="M{cx} {top} a{r} {r} 0 0 1 {r} {r} c0 {r*1.4} -{r} {size*0.58} -{r} {size*0.58} '
+        f'c0 0 -{r} -{size*0.58-r*1.4} -{r} -{size*0.58} a{r} {r} 0 0 1 {r} -{r}z" '
+        f'fill="none" stroke="{color}" stroke-width="{sw}" stroke-linejoin="round"/>'
+        f'<circle cx="{cx}" cy="{top + r}" r="{r*0.42}" fill="{color}"/>'
+    )
+
+
+def icon_badge(x, y, size, color, tint=None, icon='building'):
+    """角丸正方形の淡色地に、線画アイコンを乗せたバッジ。表の左端などに使う。
+
+    tintを省略した場合はNAVY_L相当(呼び出し側で行の色に合わせたtintを渡すのが望ましい)。
+    """
+    tint = tint or NAVY_L
+    fn = pin_icon if icon == 'pin' else building_icon
+    return (
+        f'<rect x="{x}" y="{y}" width="{size}" height="{size}" rx="{size*0.22}" fill="{tint}"/>'
+        f'{fn(x + size / 2, y + size / 2, size * 0.56, color)}'
+    )

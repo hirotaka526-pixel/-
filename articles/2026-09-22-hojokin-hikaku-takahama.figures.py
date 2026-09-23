@@ -2,7 +2,7 @@
 """「高浜市・西三河で使える住宅補助金」の図解。
 
 共通部品は .claude/skills/homepage-article/scripts/svg_kit.py。
-配色はアースカラー+淡いグリーン。イラストは使わない方針。
+配色はネイビー基調+ゴールドアクセント+複数色(2026年9月改訂)。建物の線画アイコンのみ使用可。
 文字は見出し18-20px/本文ラベル15px以上/注記14px以上を厳守。
 
 数字は2026年9月時点でWebSearchにより裏取りしたもの(国の「住宅省エネ2026キャンペーン」
@@ -11,7 +11,8 @@
 """
 from svg_kit import (NAVY, BLUE, BLUE_L, BLUE_M, GOOD, GOOD_D, CRIT, CRIT_D,
                      WARN, WARN_D, INK, INK2, MUTE, LINE, SURF, TINT,
-                     wrap, txt, box, heading, card, badge, check_badge, cross_badge)
+                     FOREST, FOREST_L, NAVY_L,
+                     wrap, txt, box, heading, card, badge, check_badge, cross_badge, icon_badge)
 
 
 # ── 図1: 国の補助金(住宅省エネ2026キャンペーン)の対象別補助額 ──────────────────────
@@ -49,19 +50,19 @@ def fig_shi_hikaku():
     s.append(heading(0, 34, '市独自の補助金は、市によってまったく違う(2026年度時点)', 18))
 
     rows = [
-        ('高浜市', '新築向けの市独自補助金は、今のところ確認されていません', '(リフォーム向けの制度は別にあります)', MUTE, False),
-        ('岡崎市', '岡崎市産材住宅建設事業費補助金', '主要構造材や内装材に地元の木材を使うと最大30万円', BLUE),
-        ('安城市', 'スマートハウス普及促進補助金', '太陽光+蓄電池+HEMSを併せて導入すると最大21万円', NAVY),
+        ('高浜市', '新築向けの市独自補助金は、今のところ確認されていません', '(リフォーム向けの制度は別にあります)', MUTE, TINT),
+        ('岡崎市', '岡崎市産材住宅建設事業費補助金', '主要構造材や内装材に地元の木材を使うと最大30万円', FOREST, FOREST_L),
+        ('安城市', 'スマートハウス普及促進補助金', '太陽光+蓄電池+HEMSを併せて導入すると最大21万円', NAVY, NAVY_L),
     ]
     y0 = 70
     row_h = 78
-    for i, row in enumerate(rows):
-        name, title, note, color = row[0], row[1], row[2], row[3]
+    for i, (name, title, note, color, tint) in enumerate(rows):
         y = y0 + i * row_h
         s.append(card(20, y, 840, row_h - 12, SURF, accent=color, shadow=False))
-        s.append(txt(45, y + 32, name, 16, INK, '700'))
-        s.append(txt(150, y + 24, title, 15, INK if color != MUTE else INK2, '700'))
-        s.append(txt(150, y + 48, note, 14, INK2, '400'))
+        s.append(icon_badge(45, y + (row_h - 12) / 2 - 17, 34, color, tint))
+        s.append(txt(95, y + 32, name, 16, INK, '700'))
+        s.append(txt(190, y + 24, title, 15, INK if color != MUTE else INK2, '700'))
+        s.append(txt(190, y + 48, note, 14, INK2, '400'))
 
     return wrap(''.join(s), W, H,
                 '高浜市・岡崎市・安城市の独自補助金比較',
