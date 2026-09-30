@@ -58,7 +58,9 @@
 - 対象台本③: `reels/2026-09-30-colorbest-fukabori.txt`(屋根カラーベストの60年コスト)
 - 対象台本④: `reels/2026-09-30-sheet-flooring-fukabori.txt`(シートフローリング vs 突板)
 - 対象台本⑤: `reels/2026-09-30-hyoji-kakaku-fukabori.txt`(表示価格のカラクリ)
-- 対象台本⑥: `reels/2026-09-30-mado-houkou-fukabori.txt`(窓は方角で役割が違う)
+- 対象台本⑥: `reels/2026-09-30-jiban-timing-fukabori.txt`(地盤改良の見積もりは"仮の数字"。
+  当初は窓の方角テーマで作ったが、2026-08-31投稿済みの`2026-08-31-mado-hoi.txt`と重複していた
+  ため差し替え)
 - 対象台本⑦: `reels/2026-09-30-youbou-junui-fukabori.txt`(要望10個・夫婦で順位付け)
 - 変数は「本編の構成そのもの」(番号リスト→単一テーマ深掘り)。これは通常の
   「1回に1変数だけ」の原則よりも大きい変更だと本人にも伝えた上で実施
