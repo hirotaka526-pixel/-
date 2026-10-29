@@ -10,8 +10,13 @@ Googleドキュメントに貼る用途では重すぎるので、**480〜620px�
 """
 import sys, os, re, glob, subprocess, importlib.util
 
-CHROME = next(iter(glob.glob('/opt/pw-browsers/*/chrome-linux/headless_shell')
-                   + glob.glob('/opt/pw-browsers/*/chrome-linux/chrome')), None)
+CHROME = next(iter(
+    glob.glob('/opt/pw-browsers/chromium')
+    + glob.glob('/opt/pw-browsers/*/chrome-linux/headless_shell')
+    + glob.glob('/opt/pw-browsers/*/chrome-linux/chrome')
+    + glob.glob('/opt/pw-browsers/*/chrome-linux64/headless_shell')
+    + glob.glob('/opt/pw-browsers/*/chrome-linux64/chrome')
+), None)
 
 
 def export_one(key, fn, cap, outdir, target_w=None):
