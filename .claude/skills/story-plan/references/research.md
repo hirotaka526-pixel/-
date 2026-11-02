@@ -1,0 +1,74 @@
+# ストーリーズ リサーチメモ(初版 2026-11-03)
+
+毎朝の提案はこのメモの原則をベースにする。新しく分かったことは日付つきで下に追記する。
+数字は外部の運用会社・ツール会社のブログ由来で、Instagram公式の数字ではない。目安として扱う。
+
+---
+
+## 指標の定義(このアカウントで使う言葉)
+
+| 言葉 | 計算 | 目標 |
+|---|---|---|
+| 閲覧率 | 1枚目のリーチ ÷ フォロワー数 | **20%(フォロワー3,400人なら約680人)** |
+| 完走率 | 最後の1枚のリーチ ÷ 1枚目のリーチ | 70%以上(平均は70%前後とされる) |
+| 反応率 | (スタンプ回答+返信+リアクション) ÷ 1枚目のリーチ | 毎日記録して推移を見る |
+
+- 閲覧率の目安は「フォロワーの6〜12%」とする記事が多い。1万人以下のアカウントなら20〜30%を目安にする記事もある。20%は「頑張れば届く、上位の水準」。
+- 完走率の平均は70%前後、小規模アカウントは68%前後というベンダーデータがある。
+
+## 閲覧率を上げる(ストーリーの列の前に出る)
+
+- ストーリーの列(トレイ)の並び順は「親密度」=普段からやり取りがある人ほど前に出る傾向、と各社が解説している(公式な確認はできていない)。
+  → **毎日スタンプ(アンケート・クイズ・スライダー・質問箱)で「1タップの反応」を積み重ねる**のが一番の近道。
+- DMで返信をもらったら必ず返す。返信のやり取りも親密度の材料になるとされる。
+- 2026年はオリジナルの内容が優遇され、転載・リポストの表示は下がる傾向、という解説がある。リール告知は「シェアするだけ」にせず、自分の一言+スタンプをつける。
+- 投稿する時間を固定する(フォロワーが「この時間にある」と覚える)。1日の中で数回に分けるより、決まった時間にまとめて出す。
+- 「24時間で消える=見逃したくない」心理が働く。「今日だけ」「明日答え合わせ」で毎日見る理由を作る。
+
+## 完走率を上げる(途中で抜けさせない)
+
+- **1枚目の1〜2秒で何の話か分かる**ようにする。1枚目で「次へ」を押されたらフックの失敗。
+- **枚数は4〜7枚**。10枚を超えると完走率が落ちやすい。
+- **1枚に1メッセージ、文字は3行まで**。文字が多い1枚で離脱が急に増えた例がある。
+- 静止画より**動画(顔出しで話す・現場の様子)の方が「次へ」が少ない**(Socialinsiderの2025年調査、16万本超)。1セットに最低1枚は動画を入れる。
+- **「答えは次のページ」**の形で、続きを見る理由を1枚ずつ作る(クイズ→答え→理由)。
+- 最後の1枚は「質問箱」か「明日の予告」にする。最後まで見る理由+翌日の閲覧につながる。
+
+## インサイトの見方
+
+- 「次へ」も「離脱」も多い1枚 → 内容がつまらない。差し替える。
+- 「戻る」が多い1枚 → 読み返されている=価値がある。次も同じ型を使う。
+- 文字だけの短い1枚で「次へ」が多いのは、速く読めただけのことがある。離脱とセットで判断する。
+- 改善は**1回に1つの指標**だけを追う(今週は閲覧率、来週は完走率、のように)。
+
+## 住宅系アカウントの使い方(他の住宅会社・インスタを調べた結果)
+
+- 一条工務店はテレビCMに頼らず、Instagramで収納アイデアや防災など「暮らしにいいこと」を発信している。売り込みより生活の役立ち情報を出している。
+- 住宅会社の集客では、施工事例だけでは問い合わせにつながりにくい。「なぜこの提案にしたか」という背景や、ルームツアーで疑似体験してもらうことが有効とされる。
+- 質問箱はフォロワーとの距離を縮める定番。工務店でストーリーの数字を公開した事例は見つからなかったので、このアカウントの数字で検証していく。
+
+## 制約(正直に書いておく)
+
+- 他のアカウントのストーリーは24時間で消え、ログインしないと見られないため、**自動でInstagramの中を直接リサーチすることはできない**。ウェブの記事・解説・公開事例から調べている。
+- このアカウントの実際の数字は自動では取れない。`stories/log.md`に本人が数字を書いてくれれば、毎朝それを読んで提案を調整する。
+
+## 出典
+
+- [S.Line 2026年版 Instagramアルゴリズム解説](https://s--line.co.jp/instagram-algorithm-2026-latest/)
+- [Planoly: How To Increase Your Instagram Story Views](https://www.planoly.com/blog/how-to-increase-your-instagram-story-views.md)
+- [Dash Social: Instagram Stories performance benchmarks](https://www.dashsocial.com/blog/every-instagram-stories-performance-benchmark-you-need-to-know)
+- [Socialinsider: 2025 Instagram Stories Benchmarks](https://www.socialinsider.io/social-media-benchmarks/instagram-stories-benchmarks)
+- [Argil: How long can an Instagram story be](https://www.argil.ai/blog/how-long-can-an-instagram-story-be)
+- [Metricool: Instagram Stories metrics 2026](https://metricool.com/instagram-stories-metrics/)
+- [Socialk.it: Instagram Stories analytics explained](https://socialk.it/en/blog/instagram-stories-analytics-explained)
+- [Inro: What does navigation mean on Instagram](https://www.inro.social/blog/what-does-navigation-mean-on-instagram)
+- [ownly: ストーリー閲覧数の確認と平均](https://www.ownly.jp/sslab/instagram-views-check)
+- [アシストオール: ストーリーズ閲覧率の目安](https://lifestyle.assist-all.co.jp/?p=54621)
+- [宣伝会議 AdverTimes: 一条工務店のインスタ戦略](https://www.advertimes.com/?p=488495)
+- [ショップオーナーサポート: 工務店のInstagram集客](https://www.shopowner-support.net/?p=41847)
+
+---
+
+## 追記ログ
+
+(毎朝のリサーチで新しく分かったことを「YYYY-MM-DD: 内容(出典URL)」で追記する)
