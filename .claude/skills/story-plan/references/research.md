@@ -73,3 +73,6 @@
 ## 追記ログ
 
 (毎朝のリサーチで新しく分かったことを「YYYY-MM-DD: 内容(出典URL)」で追記する)
+- 2026-11-07: リンクスタンプは毎回付けると見慣れて押されなくなる。アクションしてほしい日に絞り、直前に投票・クイズで1タップさせると押されやすい、という解説あり(業者ブログ、裏付けは弱い)。(https://socialbee.com/blog/how-to-add-link-to-instagram-story)
+- 2026-11-07: クイズの選択肢は2〜4個が推奨。答えを次の枚で説明する流れが定番。(https://www.view-ig-story.com/blog/instagram-story-poll-quiz-question-stickers)
+- 2026-11-07: 売り込みの適切な頻度・比率を示す信頼できるデータは見つからなかった。週2回はこのアカウントのlog.mdで検証する。
