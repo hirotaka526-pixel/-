@@ -76,3 +76,5 @@
 - 2026-11-07: リンクスタンプは毎回付けると見慣れて押されなくなる。アクションしてほしい日に絞り、直前に投票・クイズで1タップさせると押されやすい、という解説あり(業者ブログ、裏付けは弱い)。(https://socialbee.com/blog/how-to-add-link-to-instagram-story)
 - 2026-11-07: クイズの選択肢は2〜4個が推奨。答えを次の枚で説明する流れが定番。(https://www.view-ig-story.com/blog/instagram-story-poll-quiz-question-stickers)
 - 2026-11-07: 売り込みの適切な頻度・比率を示す信頼できるデータは見つからなかった。週2回はこのアカウントのlog.mdで検証する。
+- 2026-11-08: 質問スタンプの回答を共有すると、回答者の名前・アイコンが見えたままになる。スタンプや文字で隠してから載せる。(https://appllio.com/instagram-stories-question-answer)
+- 2026-11-08: 曜日ごとにスタンプを回す運用例あり(質問の日・クイズの日など)。今の曜日の型と同じ考え方。(https://www.jeffbullas.com/docs/instagram-story-stickers)
