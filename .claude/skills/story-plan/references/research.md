@@ -78,3 +78,5 @@
 - 2026-11-07: 売り込みの適切な頻度・比率を示す信頼できるデータは見つからなかった。週2回はこのアカウントのlog.mdで検証する。
 - 2026-11-08: 質問スタンプの回答を共有すると、回答者の名前・アイコンが見えたままになる。スタンプや文字で隠してから載せる。(https://appllio.com/instagram-stories-question-answer)
 - 2026-11-08: 曜日ごとにスタンプを回す運用例あり(質問の日・クイズの日など)。今の曜日の型と同じ考え方。(https://www.jeffbullas.com/docs/instagram-story-stickers)
+- 2026-11-09: 投票(アンケート)は答える手間が一番少なくタップ率が最も高い。質問箱はタップ数は少ないが中身の濃い反応が来る(業者ブログ)。(https://storrito.com/resources/how-to-use-the-poll-sticker-to-boost-engagement-on-instagram/)
+- 2026-11-09: 投票の選択肢は最大4つ。2択が一番答えやすい。(https://inspiretothrive.com/how-to-do-a-poll-on-instagram/)
