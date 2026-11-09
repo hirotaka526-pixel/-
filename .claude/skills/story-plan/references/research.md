@@ -80,3 +80,5 @@
 - 2026-11-08: 曜日ごとにスタンプを回す運用例あり(質問の日・クイズの日など)。今の曜日の型と同じ考え方。(https://www.jeffbullas.com/docs/instagram-story-stickers)
 - 2026-11-09: 投票(アンケート)は答える手間が一番少なくタップ率が最も高い。質問箱はタップ数は少ないが中身の濃い反応が来る(業者ブログ)。(https://storrito.com/resources/how-to-use-the-poll-sticker-to-boost-engagement-on-instagram/)
 - 2026-11-09: 投票の選択肢は最大4つ。2択が一番答えやすい。(https://inspiretothrive.com/how-to-do-a-poll-on-instagram/)
+- 2026-11-10: 舞台裏の動画はストーリーで信頼を得やすい形式とされる。見るべきは再生数より完走率と返信(業者ブログ)。(https://inspiretothrive.com/instagram-stories)
+- 2026-11-10: 中間気密測定=ボード・クロスを貼る前の断熱気密層完成時。隙間を見つけやすく補修しやすい(本人の方針と一致)。(https://gentosha-go.com/articles/-/41388?page=2)
