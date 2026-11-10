@@ -82,3 +82,5 @@
 - 2026-11-09: 投票の選択肢は最大4つ。2択が一番答えやすい。(https://inspiretothrive.com/how-to-do-a-poll-on-instagram/)
 - 2026-11-10: 舞台裏の動画はストーリーで信頼を得やすい形式とされる。見るべきは再生数より完走率と返信(業者ブログ)。(https://inspiretothrive.com/instagram-stories)
 - 2026-11-10: 中間気密測定=ボード・クロスを貼る前の断熱気密層完成時。隙間を見つけやすく補修しやすい(本人の方針と一致)。(https://gentosha-go.com/articles/-/41388?page=2)
+- 2026-11-11: 回答は1枚1問。写真の上の文字は半透明の帯を敷くと読みやすい(業者ブログ)。(https://socialrails.com/blog/instagram-stories-best-practices)
+- 2026-11-11: 路線価は公示地価の約8割が目安(本人の相場感と整合)。角地・形状等の個別補正があるので「目安」として扱う。(https://www.livable.co.jp/baikyaku/fudosan-baikyaku-faq/souba-002/)
